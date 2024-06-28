@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 50MB # 设置单个文件的大小为50MB
+      file-size-threshold: 0
+      enabled: true
+      max-request-size: 50MB
+#  security:
+#    user:
+#      name: kon
+#      password: kon123456
+#    basic:
+#      enabled: true
+#    authorize-requests:
+#      antMatchers:
+#        /swagger-ui.html: authenticated
+#        /doc.html: authenticated
+#  security:
+#    basic:
+#      path: /swagger-ui.html
+#      enabled: true
+#    user:
+#      name: kon
+#      password: kon123456
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'zzq'
+      paths-to-match: '/**'
+      packages-to-scan: com.example.ex3_2_back
+
+
+interceptor: true
