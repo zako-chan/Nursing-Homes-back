@@ -5,18 +5,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    Optional<User> findByName(String name);
+    Optional<User> findByUserName(String name);
 
-    Optional<User> findByNameAndPassword(String name, String password);
+    Optional<User> findByUserNameAndPassword(String name, String password);
 
 
-    boolean existsByName(String name);
+    boolean existsByUserName(String name);
 
     Optional<User> findById(Long id);
 
-    boolean existsByNameAndPassword(String name, String password);
+    boolean existsByUserNameAndPassword(String name, String password);
 
-    void deleteByName(String name);
+    void deleteByUserName(String name);
 }

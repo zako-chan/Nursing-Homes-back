@@ -13,13 +13,13 @@ import java.util.*;
 public class MyJwtUtil {
     private final Algorithm algorithm = Algorithm.HMAC256("secret");
 
-    public String createToken(Long uid) {
+    public String createToken(Integer uid) {
         return createToken(uid, 60 * 1000);
     }
 
     private static final String identityKey = "t-username";
 
-    public String createToken(Long userId, int seconds) {
+    public String createToken(Integer userId, int seconds) {
         var calendar = Calendar.getInstance();
         var currentTime = calendar.getTime();
         calendar.add(Calendar.SECOND, seconds);
@@ -35,14 +35,14 @@ public class MyJwtUtil {
     }
 
     // 解码 Token 并返回用户 ID
-    public Optional<Long> decodeToken(String token) {
+    public Optional<Integer> decodeToken(String token) {
         try {
             if (token == null || token.isEmpty()) {
                 return Optional.empty();
             }
             var verifier = JWT.require(algorithm).build();
             var jwt = verifier.verify(token);
-            Long userId = jwt.getClaim(identityKey).asLong();
+            Integer userId = jwt.getClaim(identityKey).asInt();
             return Optional.of(userId);
         } catch (Exception e) {
             log.error(String.format("Error decoding token: %s", e.getMessage()));

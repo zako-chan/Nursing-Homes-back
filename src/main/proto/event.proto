@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_package = "com.example.ex3_2_back.grpc.server";
+option java_outer_classname = "EventServiceProto";
+option java_multiple_files = true;
+option java_generic_services = true;
+
+package event;
+
+message EventServerResopnse{
+    string message = 1;
+    int32 code = 2;
+    string data = 3;
+}
+
+message EventRequest{
+    int32 eventType = 1;
+    string eventDate = 2;
+    string eventLocation = 3;
+    string eventDescription = 4;
+    int32 elderlyId = 5;
+}
+
+service EventService {
+    rpc CreatEvent(EventRequest) returns (EventServerResopnse);
+}
+

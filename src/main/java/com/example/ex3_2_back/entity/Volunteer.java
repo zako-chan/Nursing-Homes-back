@@ -1,10 +1,11 @@
 package com.example.ex3_2_back.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Date;
 
 /**
@@ -15,6 +16,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Volunteer {
 
     /**
@@ -111,11 +113,10 @@ public class Volunteer {
 
     /**
      * 是否有效
-     * 类型: char
+     * 类型: boolean
      * 大小: 10
      */
-    @Column(length = 10)
-    private String isActive;
+    private boolean isActive;
 
     /**
      * 创建时间

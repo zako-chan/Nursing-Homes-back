@@ -42,7 +42,7 @@ public class AuthService {
     @NotNull
     public Result login(@NotNull LoginDomain loginDomain, @NotNull HttpServletResponse response) {
         // 查找用户是否存在
-        Optional<User> optionalUser = userRepository.findByNameAndPassword(loginDomain.getUsername(), loginDomain.getPassword());
+        Optional<User> optionalUser = userRepository.findByUserNameAndPassword(loginDomain.getUsername(), loginDomain.getPassword());
 
         if (optionalUser.isEmpty()) {
             String message = String.format("wrong username %s or password %s", loginDomain.getUsername(), loginDomain.getPassword());
@@ -51,8 +51,8 @@ public class AuthService {
         }
 
         User user = optionalUser.get();
-        log.info(String.format("login username %s with user ID %d", user.getName(), user.getId()));
-        Long userId = user.getId();
+        log.info(String.format("login username %s with user ID %d", user.getRealName(), user.getId()));
+        Integer userId = user.getId();
         // 生成 Token
         setTokenCookie(userId, response);
 
@@ -62,7 +62,7 @@ public class AuthService {
     @NotNull
     public Result register(@NotNull RegisterDomain registerDomain) {
 
-        if (userRepository.existsByName(registerDomain.getUsername())) {
+        if (userRepository.existsByUserName(registerDomain.getUsername())) {
             String message = String.format("username %s already exists", registerDomain.getUsername());
             log.info(message);
             return Result.error(message).addErrors(registerDomain.getUsername());
@@ -74,11 +74,11 @@ public class AuthService {
             return Result.error(message);
         }
 
-        userRepository.save(User.builder()
-                .name(registerDomain.getUsername())
-                .password(registerDomain.getPassword1())
-                .email(registerDomain.getEmail())
-                .build());
+//        userRepository.save(User.builder()
+//                .realName()(registerDomain.getUsername())
+//                .password(registerDomain.getPassword1())
+//                .email(registerDomain.getEmail())
+//                .build());
 
         return Result.success();
     }
@@ -89,7 +89,7 @@ public class AuthService {
      * @param userId 用户id
      * @param response 当次的响应
      */
-    private void setTokenCookie(Long userId, HttpServletResponse response) {
+    private void setTokenCookie(Integer userId, HttpServletResponse response) {
         String newToken = jwtUtil.createToken(userId); // 生成新的 Token
         Cookie cookie = new Cookie("token", newToken);
         cookie.setHttpOnly(false);

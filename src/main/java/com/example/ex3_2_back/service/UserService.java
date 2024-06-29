@@ -35,7 +35,7 @@ public class UserService {
     // 根据名字查询单个用户
     public User findUserByName(String name) {
         try {
-            Optional<User> user = userRepository.findByName(name);
+            Optional<User> user = userRepository.findByUserName(name);
             if (user.isPresent()) {
                 return user.get();
             } else {
@@ -59,11 +59,11 @@ public class UserService {
     // 根据名字删除用户
     @Transactional
     public void deleteUserByName(String name) {
-        if (!userRepository.existsByName(name)) {
+        if (!userRepository.existsByUserName(name)) {
             throw new RuntimeException("No user found with name: " + name);
         }
         try {
-            userRepository.deleteByName(name);
+            userRepository.deleteByUserName(name);
         } catch (Exception e) {
             throw new RuntimeException("Failed to delete user by name: " + e.getMessage(), e);
         }

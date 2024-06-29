@@ -1,10 +1,11 @@
 package com.example.ex3_2_back.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
 @Table(name = "event")
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class EventInfo {
 
     /**
@@ -80,4 +81,14 @@ public class EventInfo {
     @ManyToOne
     @JoinColumn(name = "elderly_id", nullable = false)
     private Elderly elderly;
+
+    public EventInfo(int eventType, Date eventDate, String eventLocation, String eventDesc, Elderly elderly) {
+        this.eventType = eventType;
+        this.eventDate = eventDate;
+        this.eventLocation = eventLocation;
+        this.eventDesc = eventDesc;
+        this.elderly = elderly;
+    }
+
+    public EventInfo(){}
 }
