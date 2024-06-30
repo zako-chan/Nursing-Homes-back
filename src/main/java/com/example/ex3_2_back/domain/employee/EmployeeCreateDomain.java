@@ -1,18 +1,17 @@
 package com.example.ex3_2_back.domain.employee;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Builder
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@ToString
+@EqualsAndHashCode
 public class EmployeeCreateDomain {
 
 

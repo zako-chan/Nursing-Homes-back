@@ -36,7 +36,7 @@ public class ElderlyController {
     @Operation(summary = "查询所有老人", description = "查询所有老人")
     public TResult<Page<Elderly>> allElderly(@Schema(defaultValue = "0") @RequestParam int page,
                                              @Schema(defaultValue = "10") @RequestParam int pageSize,
-                                             @Schema(required = false) @RequestParam String username) {
+                                             @RequestParam(required = false) String username) {
         if(username != null) {
             Page<Elderly> elderlies = elderlyService.getElderlyByUsername(username, PageRequest.of(page,pageSize));
             return TResult.success(elderlies);

@@ -1,15 +1,12 @@
 package com.example.ex3_2_back.controller;
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
-import com.example.ex3_2_back.domain.Result;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.user.UserCreateDomain;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.UserService;
-import com.example.ex3_2_back.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +15,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -38,7 +34,7 @@ public class UserController {
     @Operation(summary = "查询所有义工", description = "查询所有义工")
     public TResult<Page<User>> allUsers(@Schema(defaultValue = "0") @RequestParam int page,
                                                   @Schema(defaultValue = "10") @RequestParam int pageSize,
-                                                  @Schema(required = false) @RequestParam String username){
+                                                  @RequestParam(required = false) String username){
         if (username != null) {
             Page<User> users = userService.getUserByUsername(username, PageRequest.of(page, pageSize));
             return TResult.success(users);
@@ -54,6 +50,13 @@ public class UserController {
         User user = userService.getUserById(id).orElse(null);
         return TResult.success(user);
 
+    }
+
+    @GetMapping("/name")
+    @Operation(summary = "根据username查询义工", description = "根据username查询义工")
+    public TResult<User> getUserByName(@Schema(description = "username") @RequestParam String name) {
+        User user = userService.findUserByName(name);
+        return TResult.success(user);
     }
 
     @PostMapping

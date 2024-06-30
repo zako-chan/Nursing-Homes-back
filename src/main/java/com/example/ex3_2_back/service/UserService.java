@@ -131,6 +131,17 @@ public class UserService {
     }
 
     /**
+     * 根据username查询用户
+     */
+    public User findUserByName(String name) {
+        Optional<User> user = userRepository.findByUserName(name);
+        if(user.isEmpty()) {
+            throw new ResourceNotExistException("用户不存在");
+        }
+        return user.get();
+    }
+
+    /**
      * 修改志愿者信息
      */
     public void updateUser(User user) {

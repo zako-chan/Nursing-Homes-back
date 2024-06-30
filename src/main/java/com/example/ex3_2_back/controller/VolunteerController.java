@@ -6,9 +6,6 @@ import com.example.ex3_2_back.domain.volunteer.VolunteerCreateDomain;
 import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.VolunteerService;
-import com.example.ex3_2_back.service.VolunteerService;
-import com.example.ex3_2_back.domain.volunteer.VolunteerCreateDomain;
-import com.example.ex3_2_back.entity.Volunteer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,8 +30,8 @@ public class VolunteerController {
     @GetMapping
     @Operation(summary = "查询所有义工", description = "查询所有义工")
     public TResult<Page<Volunteer>> allVolunteers(@Schema(defaultValue = "0") @RequestParam int page,
-                                                @Schema(defaultValue = "10") @RequestParam int pageSize,
-                                                @Schema(required = false) @RequestParam String username){
+                                                  @Schema(defaultValue = "10") @RequestParam int pageSize,
+                                                  @RequestParam(required = false) String username){
         if (username != null) {
             Page<Volunteer> volunteers = volunteerService.getVolunteerByName(username, PageRequest.of(page, pageSize));
             return TResult.success(volunteers);

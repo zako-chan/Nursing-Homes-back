@@ -32,7 +32,7 @@ public class EmployeeController {
     @Operation(summary = "查询所有员工", description = "查询所有员工")
     public TResult<Page<Employee>> allEmployees(@Schema(defaultValue = "0") @RequestParam int page,
                                        @Schema(defaultValue = "10") @RequestParam int pageSize,
-                                       @Schema(required = false) @RequestParam String username){
+                                       @RequestParam(required = false) String username){
         if (username != null) {
             Page<Employee> employees = employeeService.getEmployeeByUsername(username, PageRequest.of(page, pageSize));
             return TResult.success(employees);
