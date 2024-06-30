@@ -3,6 +3,7 @@ package com.example.ex3_2_back.controller;
 import com.example.ex3_2_back.annotations.CurrentUserId;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.entity.Elderly;
+import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.EmployeeService;
 import com.example.ex3_2_back.domain.employee.EmployeeCreateDomain;
@@ -63,7 +64,9 @@ public class EmployeeController {
     @Operation(summary = "修改员工信息", description = "修改员工信息")
     public TResult updateEmployee(@Schema(hidden = true) @CurrentUserId Integer userId,
                                @RequestBody Employee employee) {
-        employee.setUpdateBy(userId);
+        User user = new User();
+        user.setId(userId);
+        employee.setUpdateBy(user);
         employeeService.updateEmployee(employee);
         return TResult.success();
     }

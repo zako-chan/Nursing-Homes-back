@@ -65,7 +65,9 @@ public class ElderlyController {
     @Operation(summary = "修改老人信息", description = "修改老人信息")
     public TResult<Void> updateElderly(@Schema(hidden = true) @CurrentUserId Integer userId,
                                        @RequestBody Elderly elderly) {
-        elderly.setUpdateBy(userId);
+        User user = new User();
+        user.setId(userId);
+        elderly.setUpdateBy(user);
         elderlyService.updateElderly(elderly);
         return TResult.success();
     }

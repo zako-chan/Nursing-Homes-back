@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping
-    @Operation(summary = "查询所有义工", description = "查询所有义工")
+    @Operation(summary = "查询所有用户", description = "查询所有用户")
     public TResult<Page<User>> allUsers(@Schema(defaultValue = "0") @RequestParam int page,
                                                   @Schema(defaultValue = "10") @RequestParam int pageSize,
                                                   @RequestParam(required = false) String username){
@@ -45,43 +45,40 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "根据id查询义工", description = "根据id查询义工")
-    public TResult<User> getUserById(@Schema(description = "义工id") @RequestParam Integer id) {
+    @Operation(summary = "根据id查询用户", description = "根据id查询用户")
+    public TResult<User> getUserById(@Schema(description = "用户id") @RequestParam Integer id) {
         User user = userService.getUserById(id).orElse(null);
         return TResult.success(user);
 
     }
 
     @GetMapping("/name")
-    @Operation(summary = "根据username查询义工", description = "根据username查询义工")
+    @Operation(summary = "根据username查询用户", description = "根据username查询用户")
     public TResult<User> getUserByName(@Schema(description = "username") @RequestParam String name) {
         User user = userService.findUserByName(name);
         return TResult.success(user);
     }
 
     @PostMapping
-    @Operation(summary = "添加义工", description = "添加义工")
+    @Operation(summary = "添加用户", description = "添加用户")
     public TResult<Integer> addUser(@Schema(hidden = true) @CurrentUserId Integer userId,
                                          @RequestBody UserCreateDomain userCreateDomain) {
         User user = new User(userCreateDomain);
         Integer id = userService.addUser(user);
-        user.setUpdateBy(userId);
-        userService.updateUser(user);
         return TResult.success(id);
     }
 
     @PutMapping
-    @Operation(summary = "修改义工信息", description = "修改义工信息")
+    @Operation(summary = "修改用户信息", description = "修改用户信息")
     public TResult updateUser(@Schema(hidden = true) @CurrentUserId Integer userId,
                                    @RequestBody User user) {
-        user.setUpdateBy(userId);
         userService.updateUser(user);
         return TResult.success();
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "删除义工", description = "删除义工")
-    public TResult deleteUser(@Schema(description = "义工id") @RequestParam Integer id) {
+    @Operation(summary = "删除用户", description = "删除用户")
+    public TResult deleteUser(@Schema(description = "用户id") @RequestParam Integer id) {
         userService.deleteUser(id);
         return TResult.success();
     }

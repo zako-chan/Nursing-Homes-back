@@ -69,8 +69,8 @@ public class AuthService {
         }
         User user = new User(registerDomain);
         userRepository.save(user);
-        user.setUpdateBy(user.getId());
-        userRepository.save(user);
+//        user.setUpdateBy(user.getId());
+//        userRepository.save(user);
         return Result.success();
     }
 

@@ -3,6 +3,7 @@ package com.example.ex3_2_back.controller;
 import com.example.ex3_2_back.annotations.CurrentUserId;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.volunteer.VolunteerCreateDomain;
+import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.VolunteerService;
@@ -61,8 +62,10 @@ public class VolunteerController {
     @PutMapping
     @Operation(summary = "修改义工信息", description = "修改义工信息")
     public TResult updateVolunteer(@Schema(hidden = true) @CurrentUserId Integer userId,
-                                  @RequestBody VolunteerCreateDomain volunteerCreateDomain) {
-        Volunteer volunteer = new Volunteer(volunteerCreateDomain, userId);
+                                  @RequestBody Volunteer volunteer) {
+        User user = new User();
+        user.setId(userId);
+        volunteer.setUpdateBy(user);
         volunteerService.updateVolunteer(volunteer);
         return TResult.success();
     }

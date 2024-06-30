@@ -131,8 +131,9 @@ public class Employee {
      * 类型: int
      * 大小: 11
      */
-    @Column
-    private int createBy;
+    @ManyToOne
+    @JoinColumn(name = "createBy", nullable = true)
+    private User createBy;
 
     /**
      * 更新时间
@@ -147,8 +148,9 @@ public class Employee {
      * 类型: int
      * 大小: 11
      */
-    @Column
-    private int updateBy;
+    @ManyToOne
+    @JoinColumn(name = "updateBy", nullable = true)
+    private User updateBy;
 
     /**
      * 删除标志
@@ -169,7 +171,9 @@ public class Employee {
         this.description = employeeCreateDomain.getDescription();
         this.isActive = employeeCreateDomain.isActive();
         this.remove = false;
-        this.createBy = createBy;
-        this.updateBy = createBy;
+        User user = new User();
+        user.setId(createBy);
+        this.createBy = user;
+        this.updateBy = user;
     }
 }

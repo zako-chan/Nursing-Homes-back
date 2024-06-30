@@ -211,8 +211,9 @@ public class Elderly {
      * 类型: int
      * 大小: 11
      */
-    @Column
-    private int createBy;
+    @ManyToOne
+    @JoinColumn(name = "createBy", nullable = true)
+    private User createBy;
 
     /**
      * 更新时间
@@ -227,8 +228,10 @@ public class Elderly {
      * 类型: int
      * 大小: 11
      */
-    @Column
-    private int updateBy;
+//    @Column
+    @ManyToOne
+    @JoinColumn(name = "updateBy", nullable = true)
+    private User updateBy;
 
     /**
      * 删除标志
@@ -269,7 +272,9 @@ public class Elderly {
         this.description = elderlyCreateDomain.getDescription();
         this.isActive = true;
         this.remove = false;
-        this.createBy = createBy;
-        this.updateBy = createBy;
+        User user = new User();
+        user.setId(createBy);
+        this.createBy = user;
+        this.updateBy = user;
     }
 }

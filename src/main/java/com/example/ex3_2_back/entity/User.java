@@ -124,8 +124,8 @@ public class User {
      * 类型: int
      * 大小: 11
      */
-    @Column
-    private int updateBy;
+//    @Column
+//    private int updateBy;
 
     /**
      * 删除标志
