@@ -1,5 +1,6 @@
 package com.example.ex3_2_back.entity;
 
+import com.example.ex3_2_back.domain.volunteer.VolunteerCreateDomain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -60,7 +61,7 @@ public class Volunteer {
      * 类型: varchar
      * 大小: 50
      */
-    @Column(length = 50)
+    @Column(length = 50,unique = true)
     private String idCard;
 
     /**
@@ -156,4 +157,19 @@ public class Volunteer {
      */
     @Column
     private boolean remove;
+
+    public Volunteer(VolunteerCreateDomain volunteerCreateDomain,Integer createBy) {
+        this.name = volunteerCreateDomain.getName();
+        this.gender = volunteerCreateDomain.getGender();
+        this.phone = volunteerCreateDomain.getPhone();
+        this.idCard = volunteerCreateDomain.getIdCard();
+        this.birthday = volunteerCreateDomain.getBirthday();
+        this.checkinDate = volunteerCreateDomain.getCheckinDate();
+        this.checkoutDate = volunteerCreateDomain.getCheckoutDate();
+        this.profilePhoto = volunteerCreateDomain.getProfilePhoto();
+        this.description = volunteerCreateDomain.getDescription();
+        this.isActive = volunteerCreateDomain.isActive();
+        this.createBy = createBy;
+        this.updateBy = createBy;
+    }
 }

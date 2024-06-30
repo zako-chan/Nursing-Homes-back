@@ -31,7 +31,7 @@ public class CurrentUserIdResolver implements HandlerMethodArgumentResolver {
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         // 确保该解析器只应用于带有 @CurrentUserId 注解且类型为 Long 的参数
-        return parameter.hasParameterAnnotation(CurrentUserId.class) && parameter.getParameterType().equals(Long.class);
+        return parameter.hasParameterAnnotation(CurrentUserId.class) && parameter.getParameterType().equals(Integer.class);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.ex3_2_back.entity;
 
+import com.example.ex3_2_back.domain.auth.RegisterDomain;
+import com.example.ex3_2_back.domain.user.UserCreateDomain;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -90,7 +92,7 @@ public class User {
      * 是否有效
      * 类型: boolean
      */
-    @Column
+    @Column(columnDefinition = "boolean default true")
     private boolean isActive;
 
     /**
@@ -131,4 +133,25 @@ public class User {
      */
     @Column
     private boolean remove;
+
+    public User(UserCreateDomain userCreateDomain) {
+        this.userName = userCreateDomain.getUserName();
+        this.password = userCreateDomain.getPassword();
+        this.realName = userCreateDomain.getRealName();
+        this.sex = userCreateDomain.getSex();
+        this.phone = userCreateDomain.getPhone();
+        this.email = userCreateDomain.getEmail();
+        this.description = userCreateDomain.getDescription();
+        this.isActive = userCreateDomain.isActive();
+        this.remove = false;
+    }
+
+    public User(RegisterDomain registerDomain) {
+        this.userName = registerDomain.getUserName();
+        this.password = registerDomain.getPassword();
+        this.realName = registerDomain.getRealName();
+        this.email = registerDomain.getEmail();
+        this.phone = registerDomain.getPhone();
+        this.remove = false;
+    }
 }

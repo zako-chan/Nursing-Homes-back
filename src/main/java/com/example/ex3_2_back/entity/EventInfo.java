@@ -64,6 +64,12 @@ public class EventInfo {
     private String eventDesc;
 
     /**
+     * 事件截图url
+     */
+    @Column(length = 200)
+    private String eventImgUrl;
+
+    /**
      * 老人id
      * 类型: int
      * 大小: 11

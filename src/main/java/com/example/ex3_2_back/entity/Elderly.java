@@ -1,5 +1,6 @@
 package com.example.ex3_2_back.entity;
 
+import com.example.ex3_2_back.domain.elderly.ElderlyCreateDomain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -60,7 +61,7 @@ public class Elderly {
      * 类型: varchar
      * 大小: 50
      */
-    @Column(length = 50)
+    @Column(length = 50,unique = true)
     private String idCard;
 
     /**
@@ -235,4 +236,40 @@ public class Elderly {
      */
     @Column
     private boolean remove;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
+
+    public Elderly(ElderlyCreateDomain elderlyCreateDomain, int createBy) {
+        this.username = elderlyCreateDomain.getUsername();
+        this.gender = elderlyCreateDomain.getGender();
+        this.phone = elderlyCreateDomain.getPhone();
+        this.idCard = elderlyCreateDomain.getIdCard();
+        this.birthday = elderlyCreateDomain.getBirthday();
+        this.checkinDate = elderlyCreateDomain.getCheckinDate();
+        this.checkoutDate = elderlyCreateDomain.getCheckoutDate();
+        this.profilePhoto = elderlyCreateDomain.getProfilePhoto();
+        this.roomNumber = elderlyCreateDomain.getRoomNumber();
+        this.firstGuardianName = elderlyCreateDomain.getFirstGuardianName();
+        this.firstGuardianRelationship = elderlyCreateDomain.getFirstGuardianRelationship();
+        this.firstGuardianPhone = elderlyCreateDomain.getFirstGuardianPhone();
+        this.firstGuardianWechat = elderlyCreateDomain.getFirstGuardianWechat();
+        this.secondGuardianName = elderlyCreateDomain.getSecondGuardianName();
+        this.secondGuardianRelationship = elderlyCreateDomain.getSecondGuardianRelationship();
+        this.secondGuardianPhone = elderlyCreateDomain.getSecondGuardianPhone();
+        this.secondGuardianWechat = elderlyCreateDomain.getSecondGuardianWechat();
+        this.healthState = elderlyCreateDomain.getHealthState();
+        this.description = elderlyCreateDomain.getDescription();
+        this.isActive = true;
+        this.remove = false;
+        this.createBy = createBy;
+        this.updateBy = createBy;
+    }
 }

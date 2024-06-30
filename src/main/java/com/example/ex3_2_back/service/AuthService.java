@@ -42,7 +42,7 @@ public class AuthService {
     @NotNull
     public Result login(@NotNull LoginDomain loginDomain, @NotNull HttpServletResponse response) {
         // 查找用户是否存在
-        Optional<User> optionalUser = userRepository.findByUserNameAndPassword(loginDomain.getUsername(), loginDomain.getPassword());
+        Optional<User> optionalUser = userRepository.findByUserNameAndPasswordAndRemoveIsFalse(loginDomain.getUsername(), loginDomain.getPassword());
 
         if (optionalUser.isEmpty()) {
             String message = String.format("wrong username %s or password %s", loginDomain.getUsername(), loginDomain.getPassword());
@@ -62,24 +62,15 @@ public class AuthService {
     @NotNull
     public Result register(@NotNull RegisterDomain registerDomain) {
 
-        if (userRepository.existsByUserName(registerDomain.getUsername())) {
-            String message = String.format("username %s already exists", registerDomain.getUsername());
+        if (userRepository.existsByUserName(registerDomain.getUserName())) {
+            String message = String.format("username %s already exists", registerDomain.getUserName());
             log.info(message);
-            return Result.error(message).addErrors(registerDomain.getUsername());
+            return Result.error(message).addErrors(registerDomain.getUserName());
         }
-
-        if (!Objects.equals(registerDomain.getPassword1(), registerDomain.getPassword2())) {
-            String message = "inconsistent two passwords";
-            log.info(message);
-            return Result.error(message);
-        }
-
-//        userRepository.save(User.builder()
-//                .realName()(registerDomain.getUsername())
-//                .password(registerDomain.getPassword1())
-//                .email(registerDomain.getEmail())
-//                .build());
-
+        User user = new User(registerDomain);
+        userRepository.save(user);
+        user.setUpdateBy(user.getId());
+        userRepository.save(user);
         return Result.success();
     }
 

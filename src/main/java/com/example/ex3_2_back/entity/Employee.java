@@ -1,5 +1,6 @@
 package com.example.ex3_2_back.entity;
 
+import com.example.ex3_2_back.domain.employee.EmployeeCreateDomain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -60,7 +61,7 @@ public class Employee {
      * 类型: varchar
      * 大小: 50
      */
-    @Column(length = 50)
+    @Column(length = 50,unique = true)
     private String idCard;
 
     /**
@@ -155,4 +156,20 @@ public class Employee {
      */
     @Column
     private boolean remove;
+
+    public Employee(EmployeeCreateDomain employeeCreateDomain,Integer createBy) {
+        this.username = employeeCreateDomain.getUsername();
+        this.gender = employeeCreateDomain.getGender();
+        this.phone = employeeCreateDomain.getPhone();
+        this.idCard = employeeCreateDomain.getIdCard();
+        this.birthday = employeeCreateDomain.getBirthday();
+        this.hireDate = employeeCreateDomain.getHireDate();
+        this.resignDate = employeeCreateDomain.getResignDate();
+        this.profilePhoto = employeeCreateDomain.getProfilePhoto();
+        this.description = employeeCreateDomain.getDescription();
+        this.isActive = employeeCreateDomain.isActive();
+        this.remove = false;
+        this.createBy = createBy;
+        this.updateBy = createBy;
+    }
 }

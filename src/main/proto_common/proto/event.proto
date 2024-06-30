@@ -22,6 +22,6 @@ message EventRequest{
 }
 
 service EventService {
-    rpc CreatEvent(EventRequest) returns (EventServerResopnse);
+    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
 }
 
