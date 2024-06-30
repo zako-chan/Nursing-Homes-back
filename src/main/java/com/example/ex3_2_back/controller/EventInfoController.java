@@ -30,7 +30,7 @@ public class EventInfoController {
     @GetMapping
     @Operation(summary = "查询所有事件", description = "查询所有事件")
     public TResult<Page<EventInfo>> allElderly(@Schema(defaultValue = "0") @RequestParam int page,
-                                               @Schema(defaultValue = "10") @RequestParam int pageSize,) {
+                                               @Schema(defaultValue = "10") @RequestParam int pageSize) {
 
         Page<EventInfo> eventInfos = eventInfoService.getAllEvent(PageRequest.of(page,pageSize));
         return TResult.success(eventInfos);
