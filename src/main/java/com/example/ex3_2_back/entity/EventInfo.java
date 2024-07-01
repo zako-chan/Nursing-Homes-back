@@ -85,8 +85,14 @@ public class EventInfo {
      * 备注: 和老人信息表的id关联
      */
     @ManyToOne
-    @JoinColumn(name = "elderly_id", nullable = false)
+    @JoinColumn(name = "elderly_id", nullable = true)
     private Elderly elderly;
+
+    @PrePersist
+    protected void onCreate() {
+        eventDate = new Date();
+    }
+
 
     public EventInfo(int eventType, Date eventDate, String eventLocation, String eventDesc, Elderly elderly) {
         this.eventType = eventType;

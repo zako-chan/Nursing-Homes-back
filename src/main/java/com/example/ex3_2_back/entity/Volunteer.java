@@ -160,6 +160,16 @@ public class Volunteer {
     @Column
     private boolean remove;
 
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
+
     public Volunteer(VolunteerCreateDomain volunteerCreateDomain,Integer createBy) {
         this.name = volunteerCreateDomain.getName();
         this.gender = volunteerCreateDomain.getGender();

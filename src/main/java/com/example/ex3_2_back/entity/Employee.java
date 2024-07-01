@@ -159,6 +159,16 @@ public class Employee {
     @Column
     private boolean remove;
 
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
+
     public Employee(EmployeeCreateDomain employeeCreateDomain,Integer createBy) {
         this.username = employeeCreateDomain.getUsername();
         this.gender = employeeCreateDomain.getGender();

@@ -10,6 +10,9 @@ grpc:
     event-service:
       address: localhost:9090
       negotiationType: plaintext
+    message-service:
+      address: localhost:50052
+      negotiationType: plaintext
 
 spring:
   jpa:

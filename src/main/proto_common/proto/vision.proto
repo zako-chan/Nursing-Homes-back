@@ -1,0 +1,24 @@
+//syntax = "proto3";
+//
+//option java_package = "com.example.ex3_2_back.grpc.server.vision";
+//option java_outer_classname = "VisionServiceProto";
+//option java_multiple_files = true;
+//option java_generic_services = true;
+//
+//package vision;
+//
+//message CollectionFaceRequest {
+//  int32 userId = 1;
+//  string rtmpUrl = 2;
+//  string userName = 3;
+//}
+//
+//message CollectionFaceResponse {
+//  string imgUrl = 1;
+//  int32 userId = 2;
+//  string userName = 3;
+//}
+//
+//service VisionService {
+//    rpc collectionFace (CollectionFaceRequest) returns (CollectionFaceResponse) {}
+//}
