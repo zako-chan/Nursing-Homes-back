@@ -56,6 +56,7 @@ public class ElderlyController {
     @Operation(summary = "添加老人", description = "添加老人")
     public TResult<Integer> addElderly(@Schema(hidden = true) @CurrentUserId Integer userId,
                                        @RequestBody ElderlyCreateDomain elderlyCreateDomain) {
+
         Elderly elderly = new Elderly(elderlyCreateDomain, userId);
         Integer id = elderlyService.addElderly(elderly);
         return TResult.success(id);

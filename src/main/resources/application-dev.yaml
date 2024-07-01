@@ -25,6 +25,11 @@ spring:
     password: "123456789"
     username: root
 
+oss:
+  endpoint: "oss-cn-beijing.aliyuncs.com"
+  access-key-id: "LTAI5tGuLnH1EvkEG6XhbZqG"
+  access-key-secret: "izeXdapmAcAseHyUaLfOVNHKFLrRWP"
+  bucket-name: "hyxzjbnb"
 
 logging:
   level:

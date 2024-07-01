@@ -9,6 +9,7 @@ import com.aliyun.oss.model.GeneratePresignedUrlRequest;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyuncs.exceptions.ClientException;
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -26,7 +27,15 @@ import static org.springframework.core.io.buffer.DataBufferUtils.readInputStream
 public class UploadToOSS {
     //获取域名
     public static final String ALI_DOMAIN = "https://api-03-tiktok.oss-cn-beijing.aliyuncs.com/";
-
+    // 地域节点
+    @Value("${oss.endpoint}")
+    static String OSS_ENDPOINT;
+    @Value("${oss.access-key-id}")
+    static String OSS_ACCESS_KEY_ID;
+    @Value("${oss.access-key-secret}")
+    static String OSS_ACCESS_KEY_SECRET;
+    @Value("${oss.bucket-name}")
+    static String OSS_BUCKET_NAME;
 
     public static String uploadFile(MultipartFile file) throws IOException, URISyntaxException, ClientException {
         //生成新文件名
@@ -35,12 +44,9 @@ public class UploadToOSS {
         String uuid = UUID.randomUUID().toString().replace("-","");
         String fileName = uuid + ext ;
         String parentDir = "";
-        //地域节点
-        String endpoint = "http://oss-cn-beijing.aliyuncs.com";
-        // 使用环境变量中获取的RAM用户的访问密钥配置访问凭证。
-        EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
+
         // 创建OSSClient实例。
-        OSS ossClient = new OSSClientBuilder().build(endpoint, credentialsProvider);
+        OSS ossClient = new OSSClientBuilder().build(OSS_ENDPOINT, OSS_ACCESS_KEY_ID, OSS_ACCESS_KEY_SECRET);
 
         String bucketName = "api-03-tiktok";
 
@@ -61,10 +67,9 @@ public class UploadToOSS {
                 file.getInputStream()
         );
         ossClient.shutdown();
-        return ALI_DOMAIN + parentDir + LocalDate.now() + "/" + fileName;
+
+        return "http://" + OSS_BUCKET_NAME + ". " + OSS_ENDPOINT + "/" + fileName;
     }
-
-
 
 
 

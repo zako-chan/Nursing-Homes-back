@@ -135,9 +135,9 @@ public class UserService {
      */
     public User findUserByName(String name) {
         Optional<User> user = userRepository.findByUserName(name);
-        if(user.isEmpty()) {
-            throw new ResourceNotExistException("用户不存在");
-        }
+//        if(user.isEmpty()) {
+//            throw new ResourceNotExistException("用户不存在");
+//        }
         return user.get();
     }
 

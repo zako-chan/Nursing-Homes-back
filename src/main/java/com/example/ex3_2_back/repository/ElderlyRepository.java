@@ -15,4 +15,5 @@ public interface ElderlyRepository extends JpaRepository<Elderly,Integer> {
     Optional<Elderly> findById(Integer id);
 
     Page<Elderly> findByUsernameLike(String username,Pageable pageable);
+
 }
