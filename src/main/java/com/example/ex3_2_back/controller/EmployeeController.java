@@ -2,6 +2,8 @@ package com.example.ex3_2_back.controller;
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
 import com.example.ex3_2_back.domain.TResult;
+import com.example.ex3_2_back.domain.elderly.ElderlySearchDomain;
+import com.example.ex3_2_back.domain.employee.EmployeeSearchDomain;
 import com.example.ex3_2_back.entity.Elderly;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
@@ -76,5 +78,13 @@ public class EmployeeController {
     public TResult deleteEmployee(@Schema(description = "员工id") @PathVariable Integer id) {
         employeeService.removeEmployee(id);
         return TResult.success();
+    }
+
+    @PostMapping("/search")
+    @Operation(summary = "查找员工", description = "动态查找员工")
+    public TResult<Page<Employee>> searchElderly(@RequestBody EmployeeSearchDomain employeeSearchDomain,
+                                                @RequestParam int page,
+                                                @RequestParam int pageSize) {
+        return TResult.success(employeeService.searchEmployeeDynamic(employeeSearchDomain,PageRequest.of(page,pageSize)));
     }
 }

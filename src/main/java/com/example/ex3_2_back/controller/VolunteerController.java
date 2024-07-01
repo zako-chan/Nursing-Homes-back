@@ -2,7 +2,9 @@ package com.example.ex3_2_back.controller;
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
 import com.example.ex3_2_back.domain.TResult;
+import com.example.ex3_2_back.domain.volunteer.VolunteerSearchDomain;
 import com.example.ex3_2_back.domain.volunteer.VolunteerCreateDomain;
+import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.log.AutoTakeCount;
@@ -75,5 +77,13 @@ public class VolunteerController {
     public TResult deleteVolunteer(@Schema(description = "义工id") @PathVariable Integer id) {
         volunteerService.deleteVolunteer(id);
         return TResult.success();
+    }
+
+    @PostMapping("/search")
+    @Operation(summary = "查找老人", description = "动态查找老人")
+    public TResult<Page<Volunteer>> searchVolunteer(@RequestBody VolunteerSearchDomain volunteerSearchDomain,
+                                                @RequestParam int page,
+                                                @RequestParam int pageSize) {
+        return TResult.success(volunteerService.searchVolunteerDynamic(volunteerSearchDomain,PageRequest.of(page,pageSize)));
     }
 }

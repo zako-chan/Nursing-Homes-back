@@ -51,7 +51,7 @@ public class AuthService {
         }
 
         User user = optionalUser.get();
-        if(user.isActive() == true) {
+        if(user.isActive() == false) {
             String message = String.format("该用户已被禁用");
             log.info(message);
             return Result.error(message).addErrors(message).addDevMessages(new DevMessage(loginDomain));

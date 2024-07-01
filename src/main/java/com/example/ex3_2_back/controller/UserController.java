@@ -2,7 +2,9 @@ package com.example.ex3_2_back.controller;
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
 import com.example.ex3_2_back.domain.TResult;
+import com.example.ex3_2_back.domain.user.UserSearchDomain;
 import com.example.ex3_2_back.domain.user.UserCreateDomain;
+import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.UserService;
@@ -85,4 +87,11 @@ public class UserController {
         return TResult.success();
     }
 
+    @PostMapping("/search")
+    @Operation(summary = "查找用户", description = "动态查找用户")
+    public TResult<Page<User>> searchUser(@RequestBody UserSearchDomain userSearchDomain,
+                                                @RequestParam int page,
+                                                @RequestParam int pageSize) {
+        return TResult.success(userService.searchUserDynamic(userSearchDomain,PageRequest.of(page,pageSize)));
+    }
 }
