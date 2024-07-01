@@ -7,6 +7,7 @@ package com.example.ex3_2_back.service;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.UserRepository;
+import com.example.ex3_2_back.utils.UpdateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -137,12 +138,13 @@ public class UserService {
     /**
      * 根据username查询用户
      */
-    public User findUserByName(String name) {
+    public Optional<User> findUserByName(String name) {
         Optional<User> user = userRepository.findByUserName(name);
+//        user = user.orElse(null);
 //        if(user.isEmpty()) {
 //            throw new ResourceNotExistException("用户不存在");
 //        }
-        return user.get();
+        return user;
     }
 
     /**
@@ -151,7 +153,9 @@ public class UserService {
     public void updateUser(User user) {
         Optional<User> userBefore = userRepository.findById(user.getId());
         if (userBefore.isPresent()) {
-            userRepository.save(user);
+            User user1 = userBefore.get();
+            UpdateUtil.copyNotNullProperties(user, user1);
+            userRepository.save(user1);
         } else{
             throw new ResourceNotExistException("用户不存在");
         }

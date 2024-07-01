@@ -44,7 +44,7 @@ public class VolunteerController {
 
     @GetMapping("/{id}")
     @Operation(summary = "根据id查询义工", description = "根据id查询义工")
-    public TResult<Volunteer> getVolunteerById(@Schema(description = "义工id") @RequestParam Integer id) {
+    public TResult<Volunteer> getVolunteerById(@Schema(description = "义工id") @PathVariable Integer id) {
         Volunteer volunteer = volunteerService.getVolunteerById(id).orElse(null);
         return TResult.success(volunteer);
 
@@ -72,7 +72,7 @@ public class VolunteerController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除义工", description = "删除义工")
-    public TResult deleteVolunteer(@Schema(description = "义工id") @RequestParam Integer id) {
+    public TResult deleteVolunteer(@Schema(description = "义工id") @PathVariable Integer id) {
         volunteerService.deleteVolunteer(id);
         return TResult.success();
     }

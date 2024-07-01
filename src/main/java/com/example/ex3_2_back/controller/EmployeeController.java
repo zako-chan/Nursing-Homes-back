@@ -45,7 +45,7 @@ public class EmployeeController {
 
     @GetMapping("/{id}")
     @Operation(summary = "根据id查询员工", description = "根据id查询员工")
-    public TResult<Employee> getEmployeeById(@Schema(description = "员工id") @RequestParam Integer id) {
+    public TResult<Employee> getEmployeeById(@Schema(description = "员工id") @PathVariable Integer id) {
         Employee employee = employeeService.getEmployeeById(id).orElse(null);
         return TResult.success(employee);
 
@@ -73,7 +73,7 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除员工", description = "删除员工")
-    public TResult deleteEmployee(@Schema(description = "员工id") @RequestParam Integer id) {
+    public TResult deleteEmployee(@Schema(description = "员工id") @PathVariable Integer id) {
         employeeService.removeEmployee(id);
         return TResult.success();
     }

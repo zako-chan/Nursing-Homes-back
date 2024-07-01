@@ -3,6 +3,7 @@ package com.example.ex3_2_back.service;
 import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.VolunteerRepository;
+import com.example.ex3_2_back.utils.UpdateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,7 +61,9 @@ public class VolunteerService {
     public void updateVolunteer(Volunteer volunteer) {
         Optional<Volunteer> volunteerBefore = volunteerRepository.findById(volunteer.getId());
         if (volunteerBefore.isPresent()) {
-            volunteerRepository.save(volunteer);
+            Volunteer volunteer1 = volunteerBefore.get();
+            UpdateUtil.copyNotNullProperties(volunteer, volunteer1);
+            volunteerRepository.save(volunteer1);
         }else {
             throw new ResourceNotExistException("志愿者不存在");
         }

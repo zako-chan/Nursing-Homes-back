@@ -47,7 +47,7 @@ public class ElderlyController {
 
     @GetMapping("/{id}")
     @Operation(summary = "根据id查询老人", description = "根据id查询老人")
-    public TResult<Elderly> getElderlyById(@Schema(description = "老人id") @RequestParam Integer id) {
+    public TResult<Elderly> getElderlyById(@Schema(description = "老人id") @PathVariable Integer id) {
         Elderly elderly = elderlyService.getElderlyById(id).orElse(null);
         return TResult.success(elderly);
     }
@@ -75,7 +75,7 @@ public class ElderlyController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除老人", description = "删除老人")
-    public TResult<Void> deleteElderly(@Schema(description = "老人id") @RequestParam Integer id) {
+    public TResult<Void> deleteElderly(@Schema(description = "老人id") @PathVariable Integer id) {
         elderlyService.removeElderly(id);
         return TResult.success();
     }

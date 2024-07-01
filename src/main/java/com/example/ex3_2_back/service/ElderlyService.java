@@ -5,6 +5,7 @@ import com.example.ex3_2_back.entity.Elderly;
 import com.example.ex3_2_back.exception.ResourceAlreadyExistsException;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.ElderlyRepository;
+import com.example.ex3_2_back.utils.UpdateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -62,7 +63,9 @@ public class ElderlyService {
     public void updateElderly(Elderly elderly) {
         Optional<Elderly> elderlyBefore = elderlyRepository.findById(elderly.getId());
         if (elderlyBefore.isPresent()) {
-            elderlyRepository.save(elderly);
+            Elderly elderly1 = elderlyBefore.get();
+            UpdateUtil.copyNotNullProperties(elderly, elderly1);
+            elderlyRepository.save(elderly1);
         } else {
             throw new ResourceNotExistException("老人不存在");
         }

@@ -4,6 +4,7 @@ package com.example.ex3_2_back.service;
 import com.example.ex3_2_back.entity.Employee;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.EmployeeRepository;
+import com.example.ex3_2_back.utils.UpdateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.utils.Rfc3492Idn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,9 @@ public class EmployeeService {
     public void updateEmployee(Employee employee) {
         Optional<Employee> employeeBefore = employeeRepository.findById(employee.getId());
         if (employeeBefore.isPresent()) {
-            employeeRepository.save(employee);
+            Employee employee1 = employeeBefore.get();
+            UpdateUtil.copyNotNullProperties(employee, employee1);
+            employeeRepository.save(employee1);
         } else {
             throw new ResourceNotExistException("员工不存在");
         }

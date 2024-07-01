@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/user")
@@ -46,7 +48,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     @Operation(summary = "根据id查询用户", description = "根据id查询用户")
-    public TResult<User> getUserById(@Schema(description = "用户id") @RequestParam Integer id) {
+    public TResult<User> getUserById(@Schema(description = "用户id") @PathVariable Integer id) {
         User user = userService.getUserById(id).orElse(null);
         return TResult.success(user);
 
@@ -54,8 +56,8 @@ public class UserController {
 
     @GetMapping("/name")
     @Operation(summary = "根据username查询用户", description = "根据username查询用户")
-    public TResult<User> getUserByName(@Schema(description = "username") @RequestParam String name) {
-        User user = userService.findUserByName(name);
+    public TResult<Optional<User>> getUserByName(@Schema(description = "username") @RequestParam String name) {
+        Optional<User> user = userService.findUserByName(name);
         return TResult.success(user);
     }
 
@@ -78,7 +80,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "删除用户", description = "删除用户")
-    public TResult deleteUser(@Schema(description = "用户id") @RequestParam Integer id) {
+    public TResult deleteUser(@Schema(description = "用户id") @PathVariable Integer id) {
         userService.deleteUser(id);
         return TResult.success();
     }
