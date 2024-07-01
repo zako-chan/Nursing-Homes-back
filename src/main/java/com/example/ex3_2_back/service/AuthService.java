@@ -51,6 +51,11 @@ public class AuthService {
         }
 
         User user = optionalUser.get();
+        if(user.isActive() == true) {
+            String message = String.format("该用户已被禁用");
+            log.info(message);
+            return Result.error(message).addErrors(message).addDevMessages(new DevMessage(loginDomain));
+        }
         log.info(String.format("login username %s with user ID %d", user.getRealName(), user.getId()));
         Integer userId = user.getId();
         // 生成 Token
