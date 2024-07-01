@@ -4,18 +4,27 @@ package com.example.ex3_2_back.service;
  * @author hyxzjbnb
  * @create 2024-06-03-15:32
  */
+import com.example.ex3_2_back.domain.user.UserSearchDomain;
+import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.UserRepository;
 import com.example.ex3_2_back.utils.UpdateUtil;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.ex3_2_back.entity.User;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -159,6 +168,33 @@ public class UserService {
         } else{
             throw new ResourceNotExistException("用户不存在");
         }
+    }
+
+    /**
+     * 根据条件动态查询用户信息
+     */
+    public Page<User> searchUserDynamic(UserSearchDomain userSearchDomain, Pageable pageable) {
+        Specification<User> queryCondition = new Specification<User>() {
+            @Override
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicateList = new ArrayList<>();
+                if (userSearchDomain.getUserName() != null && !userSearchDomain.getUserName().isEmpty()) {
+                    predicateList.add(criteriaBuilder.like(root.get("userName"), "%" + userSearchDomain.getUserName() + "%"));
+                }
+                if (userSearchDomain.getSex() != null && !userSearchDomain.getSex().isEmpty()) {
+                    predicateList.add(criteriaBuilder.equal(root.get("sex"), userSearchDomain.getSex()));
+                }
+                if(userSearchDomain.getIsActive() != null) {
+                    predicateList.add(criteriaBuilder.equal(root.get("active"), userSearchDomain.getIsActive()));
+                }
+                if(userSearchDomain.getRealName() != null && !userSearchDomain.getRealName().isEmpty()) {
+                    predicateList.add(criteriaBuilder.like(root.get("realName"), "%" + userSearchDomain.getRealName() + "%"));
+                }
+                return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
+            }
+        };
+
+        return userRepository.findAll(queryCondition, pageable);
     }
 }
 

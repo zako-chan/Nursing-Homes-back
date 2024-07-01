@@ -4,6 +4,7 @@ package com.example.ex3_2_back.controller;
 import com.example.ex3_2_back.annotations.CurrentUserId;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.elderly.ElderlyCreateDomain;
+import com.example.ex3_2_back.domain.elderly.ElderlySearchDomain;
 import com.example.ex3_2_back.entity.Elderly;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
@@ -79,5 +80,14 @@ public class ElderlyController {
         elderlyService.removeElderly(id);
         return TResult.success();
     }
+
+    @PostMapping("/search")
+    @Operation(summary = "查找老人", description = "动态查找老人")
+    public TResult<Page<Elderly>> searchElderly(@RequestBody ElderlySearchDomain elderlySearchDomain,
+                                                @RequestParam int page,
+                                                @RequestParam int pageSize) {
+        return TResult.success(elderlyService.searchElderlyDynamic(elderlySearchDomain,PageRequest.of(page,pageSize)));
+    }
+
 
 }

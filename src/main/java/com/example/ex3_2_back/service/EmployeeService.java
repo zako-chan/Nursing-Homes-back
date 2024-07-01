@@ -1,17 +1,27 @@
 package com.example.ex3_2_back.service;
 
 
+import com.example.ex3_2_back.domain.employee.EmployeeSearchDomain;
+import com.example.ex3_2_back.domain.employee.EmployeeSearchDomain;
+import com.example.ex3_2_back.entity.Employee;
 import com.example.ex3_2_back.entity.Employee;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.EmployeeRepository;
 import com.example.ex3_2_back.utils.UpdateUtil;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.utils.Rfc3492Idn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -81,5 +91,29 @@ public class EmployeeService {
         } else {
             throw new ResourceNotExistException("员工不存在");
         }
+    }
+    
+    /**
+     * 根据条件动态查询员工信息
+     */
+    public Page<Employee> searchEmployeeDynamic(EmployeeSearchDomain employeeSearchDomain, Pageable pageable) {
+        Specification<Employee> queryCondition = new Specification<Employee>() {
+            @Override
+            public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> predicateList = new ArrayList<>();
+                if (employeeSearchDomain.getUsername() != null && !employeeSearchDomain.getUsername().isEmpty()) {
+                    predicateList.add(criteriaBuilder.like(root.get("username"), "%" + employeeSearchDomain.getUsername() + "%"));
+                }
+                if (employeeSearchDomain.getGender() != null && !employeeSearchDomain.getGender().isEmpty()) {
+                    predicateList.add(criteriaBuilder.equal(root.get("gender"), employeeSearchDomain.getGender()));
+                }
+                if(employeeSearchDomain.getIsActive() != null) {
+                    predicateList.add(criteriaBuilder.equal(root.get("active"), employeeSearchDomain.getIsActive()));
+                }
+                return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
+            }
+        };
+
+        return employeeRepository.findAll(queryCondition, pageable);
     }
 }

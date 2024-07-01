@@ -136,6 +136,11 @@ public class User {
     @Column
     private boolean remove;
 
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
+
     public User(UserCreateDomain userCreateDomain) {
         this.userName = userCreateDomain.getUserName();
         this.password = userCreateDomain.getPassword();
