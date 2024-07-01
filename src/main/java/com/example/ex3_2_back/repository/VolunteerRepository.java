@@ -12,4 +12,6 @@ public interface VolunteerRepository extends JpaRepository<Volunteer,Integer> {
     Optional<Volunteer> findById(Integer id);
 
     Page<Volunteer> findByNameLike(String name,org.springframework.data.domain.Pageable pageable);
+
+    Optional<Volunteer> findByIdCard(String idCard);
 }

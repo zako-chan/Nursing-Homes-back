@@ -47,6 +47,10 @@ public class EmployeeService {
      * 添加员工信息,并返回id
      */
     public Integer addEmployee(Employee employee) {
+        Optional<Employee> employeeByIdCard = employeeRepository.findByIdCard(employee.getIdCard());
+        if (employeeByIdCard.isPresent()) {
+            throw new ResourceNotExistException("身份证号已存在");
+        }
         Employee employee1 = employeeRepository.save(employee);
         return employee1.getId();
     }

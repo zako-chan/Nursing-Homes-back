@@ -46,6 +46,10 @@ public class VolunteerService {
      * 添加志愿者信息,并返回id
      */
     public Integer addVolunteer(Volunteer volunteer) {
+        Optional<Volunteer> volunteerByIdCard = volunteerRepository.findByIdCard(volunteer.getIdCard());
+        if (volunteerByIdCard.isPresent()) {
+            throw new ResourceNotExistException("身份证号已存在");
+        }
         Volunteer volunteer1 = volunteerRepository.save(volunteer);
         return volunteer1.getId();
     }

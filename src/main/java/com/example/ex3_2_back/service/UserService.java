@@ -76,6 +76,10 @@ public class UserService {
      * 添加用户信息,并返回id
      */
     public Integer addUser(User user) {
+        Optional<User> userByUserName = userRepository.findByUserName(user.getUserName());
+        if (userByUserName.isPresent()) {
+            throw new ResourceNotExistException("用户名已存在");
+        }
         User user1 = userRepository.save(user);
         return user1.getId();
     }

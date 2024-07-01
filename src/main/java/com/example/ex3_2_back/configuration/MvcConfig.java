@@ -42,7 +42,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173")
+                .allowedOrigins("http://localhost:8087")
                 .allowedHeaders("*")
                 .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH","DELETE")
                 .exposedHeaders("Set-Cookie", "Authorization")

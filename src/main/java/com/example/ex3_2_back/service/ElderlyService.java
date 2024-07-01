@@ -2,6 +2,7 @@ package com.example.ex3_2_back.service;
 
 
 import com.example.ex3_2_back.entity.Elderly;
+import com.example.ex3_2_back.exception.ResourceAlreadyExistsException;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.ElderlyRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,10 @@ public class ElderlyService {
      * 添加老人信息,并返回id
      */
     public Integer addElderly(Elderly elderly) {
+        Optional<Elderly> elderlyByIdCard = elderlyRepository.findByIdCard(elderly.getIdCard());
+        if (elderlyByIdCard.isPresent()) {
+            throw new ResourceAlreadyExistsException("身份证号已存在");
+        }
         Elderly elderly1 = elderlyRepository.save(elderly);
         return elderly1.getId();
     }

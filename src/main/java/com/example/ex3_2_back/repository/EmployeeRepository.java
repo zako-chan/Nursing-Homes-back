@@ -13,4 +13,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
     Optional<Employee> findById(Integer id);
 
     Page<Employee> findByUsernameLike(String username,Pageable pageable);
+
+    Optional<Employee> findByIdCard(String idCard);
 }
