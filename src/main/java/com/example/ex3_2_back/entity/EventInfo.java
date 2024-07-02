@@ -85,7 +85,7 @@ public class EventInfo {
      * 备注: 和老人信息表的id关联
      */
     @ManyToOne
-    @JoinColumn(name = "elderly_id", nullable = true)
+    @JoinColumn(name = "elderly_id", nullable = false)
     private Elderly elderly;
 
     @PrePersist

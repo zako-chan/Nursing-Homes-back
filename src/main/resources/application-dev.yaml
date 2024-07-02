@@ -6,13 +6,14 @@ grpc:
   server:
     port: 9380
     inProcessName: test
-  client:
-    event-service:
-      address: localhost:9090
-      negotiationType: plaintext
-    message-service:
-      address: localhost:50052
-      negotiationType: plaintext
+client:
+  event-service:
+    address: localhost:9090
+    negotiationType: plaintext
+  message-service:
+  #      address: 172.20.10.6:50052
+    address: 172.20.10.6:8503
+    negotiationType: plaintext
 
 spring:
   jpa:

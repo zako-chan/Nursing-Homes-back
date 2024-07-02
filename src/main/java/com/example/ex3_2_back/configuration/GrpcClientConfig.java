@@ -22,7 +22,7 @@ public class GrpcClientConfig {
     /**
      * message服务地址
      */
-    @Value("${grpc.client.message-service.address}")
+    @Value("${client.message-service.address}")
     private String messageServiceAddress;
 
     /**
