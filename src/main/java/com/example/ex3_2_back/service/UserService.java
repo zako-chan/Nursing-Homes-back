@@ -185,7 +185,7 @@ public class UserService {
                     predicateList.add(criteriaBuilder.equal(root.get("sex"), userSearchDomain.getSex()));
                 }
                 if(userSearchDomain.getIsActive() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("active"), userSearchDomain.getIsActive()));
+                    predicateList.add(criteriaBuilder.equal(root.get("isActive"), userSearchDomain.getIsActive()));
                 }
                 if(userSearchDomain.getRealName() != null && !userSearchDomain.getRealName().isEmpty()) {
                     predicateList.add(criteriaBuilder.like(root.get("realName"), "%" + userSearchDomain.getRealName() + "%"));

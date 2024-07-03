@@ -108,7 +108,7 @@ public class EmployeeService {
                     predicateList.add(criteriaBuilder.equal(root.get("gender"), employeeSearchDomain.getGender()));
                 }
                 if(employeeSearchDomain.getIsActive() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("active"), employeeSearchDomain.getIsActive()));
+                    predicateList.add(criteriaBuilder.equal(root.get("isActive"), employeeSearchDomain.getIsActive()));
                 }
                 return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
             }

@@ -2,6 +2,21 @@
 server:
   port: 8080
 
+grpc:
+  server:
+    port: 9380
+    inProcessName: test
+client:
+  event-service:
+    address: host.docker.internal:9090
+    negotiationType: plaintext
+  message-service:
+    address: host.docker.internal:8503
+#    address: localhost:8503
+#    address: 8.130.169.249:8503
+#    address: 172.20.10.6:8503
+    negotiationType: plaintext
+
 spring:
   jpa:
     database: mysql
@@ -9,18 +24,26 @@ spring:
       ddl-auto: update
     database-platform:
   datasource:
-    url: jdbc:mysql://localhost:3306/warehouse_test?serverTimezone=GMT%2B8
-    password: ""
+    url: jdbc:mysql://c_mysql:3306/nursing_home?serverTimezone=GMT%2B8
+    password: "123456789"
     username: root
 
-springfox:
-  documentation:
-    swagger-ui:
-      enabled: false
+oss:
+  endpoint: "oss-cn-beijing.aliyuncs.com"
+  access-key-id: "LTAI5tGuLnH1EvkEG6XhbZqG"
+  access-key-secret: "izeXdapmAcAseHyUaLfOVNHKFLrRWP"
+  bucket-name: "hyxzjbnb"
 
 logging:
   level:
-    root: info   # 根日志级别设置为info，将会记录info及以上级别的日志
+    root: info  # 根日志级别设置为info，将会记录info及以上级别的日志
+#    com.example.ex3_2_back: debug  # 指定某个包的日志级别为debug
+#    org.hibernate.SQL: trace
+#    org:
+#      hibernate:
+#        orm:
+#          jdbc:
+#            bind: trace
   file:
     name: app.log   # 指定日志文件名称
   pattern:
@@ -33,5 +56,3 @@ logging:
       append: true
     console:
       type: console
-
-dataInit: false

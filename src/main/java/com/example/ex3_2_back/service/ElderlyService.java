@@ -113,7 +113,7 @@ public class ElderlyService {
                     predicateList.add(criteriaBuilder.like(root.get("healthState"), elderlySearchDomain.getHealthState()));
                 }
                 if(elderlySearchDomain.getIsActive() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("active"), elderlySearchDomain.getIsActive()));
+                    predicateList.add(criteriaBuilder.equal(root.get("isActive"), elderlySearchDomain.getIsActive()));
                 }
                 return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
             }

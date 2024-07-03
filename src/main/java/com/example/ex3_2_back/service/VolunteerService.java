@@ -107,7 +107,7 @@ public class VolunteerService {
                     predicateList.add(criteriaBuilder.equal(root.get("gender"), volunteerSearchDomain.getGender()));
                 }
                 if(volunteerSearchDomain.getIsActive() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("active"), volunteerSearchDomain.getIsActive()));
+                    predicateList.add(criteriaBuilder.equal(root.get("isActive"), volunteerSearchDomain.getIsActive()));
                 }
                 return criteriaBuilder.and(predicateList.toArray(new Predicate[predicateList.size()]));
             }
