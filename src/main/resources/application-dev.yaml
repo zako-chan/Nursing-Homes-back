@@ -14,6 +14,9 @@ client:
   #      address: 172.20.10.6:50052
     address: 172.20.10.6:8503
     negotiationType: plaintext
+  vision-service:
+    address: 172.20.10.6:8503
+    negotiationType: plaintext
 
 spring:
   jpa:

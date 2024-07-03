@@ -100,6 +100,17 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int CAMERAID_FIELD_NUMBER = 4;
+  private int cameraId_ = 0;
+  /**
+   * <code>int32 cameraId = 4;</code>
+   * @return The cameraId.
+   */
+  @java.lang.Override
+  public int getCameraId() {
+    return cameraId_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -123,6 +134,9 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(imageUrl_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, imageUrl_);
     }
+    if (cameraId_ != 0) {
+      output.writeInt32(4, cameraId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -142,6 +156,10 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(imageUrl_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, imageUrl_);
+    }
+    if (cameraId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(4, cameraId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -164,6 +182,8 @@ private static final long serialVersionUID = 0L;
         != other.getVolunteerId()) return false;
     if (!getImageUrl()
         .equals(other.getImageUrl())) return false;
+    if (getCameraId()
+        != other.getCameraId()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -181,6 +201,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getVolunteerId();
     hash = (37 * hash) + IMAGEURL_FIELD_NUMBER;
     hash = (53 * hash) + getImageUrl().hashCode();
+    hash = (37 * hash) + CAMERAID_FIELD_NUMBER;
+    hash = (53 * hash) + getCameraId();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -315,6 +337,7 @@ private static final long serialVersionUID = 0L;
       elderlyId_ = 0;
       volunteerId_ = 0;
       imageUrl_ = "";
+      cameraId_ = 0;
       return this;
     }
 
@@ -356,6 +379,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000004) != 0)) {
         result.imageUrl_ = imageUrl_;
+      }
+      if (((from_bitField0_ & 0x00000008) != 0)) {
+        result.cameraId_ = cameraId_;
       }
     }
 
@@ -414,6 +440,9 @@ private static final long serialVersionUID = 0L;
         bitField0_ |= 0x00000004;
         onChanged();
       }
+      if (other.getCameraId() != 0) {
+        setCameraId(other.getCameraId());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -455,6 +484,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000004;
               break;
             } // case 26
+            case 32: {
+              cameraId_ = input.readInt32();
+              bitField0_ |= 0x00000008;
+              break;
+            } // case 32
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -604,6 +638,38 @@ private static final long serialVersionUID = 0L;
       checkByteStringIsUtf8(value);
       imageUrl_ = value;
       bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+
+    private int cameraId_ ;
+    /**
+     * <code>int32 cameraId = 4;</code>
+     * @return The cameraId.
+     */
+    @java.lang.Override
+    public int getCameraId() {
+      return cameraId_;
+    }
+    /**
+     * <code>int32 cameraId = 4;</code>
+     * @param value The cameraId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setCameraId(int value) {
+
+      cameraId_ = value;
+      bitField0_ |= 0x00000008;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 cameraId = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearCameraId() {
+      bitField0_ = (bitField0_ & ~0x00000008);
+      cameraId_ = 0;
       onChanged();
       return this;
     }

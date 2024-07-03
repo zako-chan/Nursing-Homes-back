@@ -24,4 +24,22 @@ public interface EmotionDetectionEventRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getImageUrlBytes();
+
+  /**
+   * <code>string emotion = 3;</code>
+   * @return The emotion.
+   */
+  java.lang.String getEmotion();
+  /**
+   * <code>string emotion = 3;</code>
+   * @return The bytes for emotion.
+   */
+  com.google.protobuf.ByteString
+      getEmotionBytes();
+
+  /**
+   * <code>int32 cameraId = 4;</code>
+   * @return The cameraId.
+   */
+  int getCameraId();
 }

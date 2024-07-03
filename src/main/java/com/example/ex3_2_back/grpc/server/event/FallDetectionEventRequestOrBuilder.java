@@ -18,4 +18,16 @@ public interface FallDetectionEventRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getImageUrlBytes();
+
+  /**
+   * <code>int32 elderlyId = 2;</code>
+   * @return The elderlyId.
+   */
+  int getElderlyId();
+
+  /**
+   * <code>int32 cameraId = 3;</code>
+   * @return The cameraId.
+   */
+  int getCameraId();
 }

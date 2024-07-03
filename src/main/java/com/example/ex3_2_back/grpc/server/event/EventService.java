@@ -16,6 +16,14 @@ public  abstract class EventService
      *    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
      * </pre>
      *
+     * <code>rpc FaceRecognitionEvent(.event.FaceRecognitionEventRequest) returns (.event.EventServerResopnse);</code>
+     */
+    public abstract void faceRecognitionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request,
+        com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
+
+    /**
      * <code>rpc EmotionDetectionEvent(.event.EmotionDetectionEventRequest) returns (.event.EventServerResopnse);</code>
      */
     public abstract void emotionDetectionEvent(
@@ -55,11 +63,27 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
 
+    /**
+     * <code>rpc UpdateImageUrl(.event.UpdateImageUrlRequest) returns (.event.EventServerResopnse);</code>
+     */
+    public abstract void updateImageUrl(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
+        com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
+
   }
 
   public static com.google.protobuf.Service newReflectiveService(
       final Interface impl) {
     return new EventService() {
+      @java.lang.Override
+      public  void faceRecognitionEvent(
+          com.google.protobuf.RpcController controller,
+          com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request,
+          com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
+        impl.faceRecognitionEvent(controller, request, done);
+      }
+
       @java.lang.Override
       public  void emotionDetectionEvent(
           com.google.protobuf.RpcController controller,
@@ -100,6 +124,14 @@ public  abstract class EventService
         impl.forbiddenAreaInvasionDetectionEvent(controller, request, done);
       }
 
+      @java.lang.Override
+      public  void updateImageUrl(
+          com.google.protobuf.RpcController controller,
+          com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
+          com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
+        impl.updateImageUrl(controller, request, done);
+      }
+
     };
   }
 
@@ -123,15 +155,19 @@ public  abstract class EventService
         }
         switch(method.getIndex()) {
           case 0:
-            return impl.emotionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest)request);
+            return impl.faceRecognitionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest)request);
           case 1:
-            return impl.volunteerInteractionEvent(controller, (com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest)request);
+            return impl.emotionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest)request);
           case 2:
-            return impl.strangerDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest)request);
+            return impl.volunteerInteractionEvent(controller, (com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest)request);
           case 3:
-            return impl.fallDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest)request);
+            return impl.strangerDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest)request);
           case 4:
+            return impl.fallDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest)request);
+          case 5:
             return impl.forbiddenAreaInvasionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest)request);
+          case 6:
+            return impl.updateImageUrl(controller, (com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest)request);
           default:
             throw new java.lang.AssertionError("Can't get here.");
         }
@@ -147,15 +183,19 @@ public  abstract class EventService
         }
         switch(method.getIndex()) {
           case 0:
-            return com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest.getDefaultInstance();
+            return com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest.getDefaultInstance();
           case 1:
-            return com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest.getDefaultInstance();
+            return com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest.getDefaultInstance();
           case 2:
-            return com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest.getDefaultInstance();
+            return com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest.getDefaultInstance();
           case 3:
-            return com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest.getDefaultInstance();
+            return com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest.getDefaultInstance();
           case 4:
+            return com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest.getDefaultInstance();
+          case 5:
             return com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest.getDefaultInstance();
+          case 6:
+            return com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest.getDefaultInstance();
           default:
             throw new java.lang.AssertionError("Can't get here.");
         }
@@ -180,6 +220,10 @@ public  abstract class EventService
             return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
           case 4:
             return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
+          case 5:
+            return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
+          case 6:
+            return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
           default:
             throw new java.lang.AssertionError("Can't get here.");
         }
@@ -193,6 +237,14 @@ public  abstract class EventService
    *    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
    * </pre>
    *
+   * <code>rpc FaceRecognitionEvent(.event.FaceRecognitionEventRequest) returns (.event.EventServerResopnse);</code>
+   */
+  public abstract void faceRecognitionEvent(
+      com.google.protobuf.RpcController controller,
+      com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request,
+      com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
+
+  /**
    * <code>rpc EmotionDetectionEvent(.event.EmotionDetectionEventRequest) returns (.event.EventServerResopnse);</code>
    */
   public abstract void emotionDetectionEvent(
@@ -232,6 +284,14 @@ public  abstract class EventService
       com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request,
       com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
 
+  /**
+   * <code>rpc UpdateImageUrl(.event.UpdateImageUrlRequest) returns (.event.EventServerResopnse);</code>
+   */
+  public abstract void updateImageUrl(
+      com.google.protobuf.RpcController controller,
+      com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
+      com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
+
   public static final
       com.google.protobuf.Descriptors.ServiceDescriptor
       getDescriptor() {
@@ -255,27 +315,37 @@ public  abstract class EventService
     }
     switch(method.getIndex()) {
       case 0:
-        this.emotionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest)request,
+        this.faceRecognitionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest)request,
           com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
             done));
         return;
       case 1:
-        this.volunteerInteractionEvent(controller, (com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest)request,
+        this.emotionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest)request,
           com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
             done));
         return;
       case 2:
-        this.strangerDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest)request,
+        this.volunteerInteractionEvent(controller, (com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest)request,
           com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
             done));
         return;
       case 3:
-        this.fallDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest)request,
+        this.strangerDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest)request,
           com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
             done));
         return;
       case 4:
+        this.fallDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest)request,
+          com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
+            done));
+        return;
+      case 5:
         this.forbiddenAreaInvasionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest)request,
+          com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
+            done));
+        return;
+      case 6:
+        this.updateImageUrl(controller, (com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest)request,
           com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
             done));
         return;
@@ -294,15 +364,19 @@ public  abstract class EventService
     }
     switch(method.getIndex()) {
       case 0:
-        return com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest.getDefaultInstance();
+        return com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest.getDefaultInstance();
       case 1:
-        return com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest.getDefaultInstance();
+        return com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest.getDefaultInstance();
       case 2:
-        return com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest.getDefaultInstance();
+        return com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest.getDefaultInstance();
       case 3:
-        return com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest.getDefaultInstance();
+        return com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest.getDefaultInstance();
       case 4:
+        return com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest.getDefaultInstance();
+      case 5:
         return com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest.getDefaultInstance();
+      case 6:
+        return com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest.getDefaultInstance();
       default:
         throw new java.lang.AssertionError("Can't get here.");
     }
@@ -327,6 +401,10 @@ public  abstract class EventService
         return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
       case 4:
         return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
+      case 5:
+        return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
+      case 6:
+        return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
       default:
         throw new java.lang.AssertionError("Can't get here.");
     }
@@ -348,12 +426,27 @@ public  abstract class EventService
       return channel;
     }
 
+    public  void faceRecognitionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request,
+        com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
+      channel.callMethod(
+        getDescriptor().getMethods().get(0),
+        controller,
+        request,
+        com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
+        com.google.protobuf.RpcUtil.generalizeCallback(
+          done,
+          com.example.ex3_2_back.grpc.server.event.EventServerResopnse.class,
+          com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()));
+    }
+
     public  void emotionDetectionEvent(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
       channel.callMethod(
-        getDescriptor().getMethods().get(0),
+        getDescriptor().getMethods().get(1),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
@@ -368,7 +461,7 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
       channel.callMethod(
-        getDescriptor().getMethods().get(1),
+        getDescriptor().getMethods().get(2),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
@@ -383,7 +476,7 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
       channel.callMethod(
-        getDescriptor().getMethods().get(2),
+        getDescriptor().getMethods().get(3),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
@@ -398,7 +491,7 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
       channel.callMethod(
-        getDescriptor().getMethods().get(3),
+        getDescriptor().getMethods().get(4),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
@@ -413,7 +506,22 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
       channel.callMethod(
-        getDescriptor().getMethods().get(4),
+        getDescriptor().getMethods().get(5),
+        controller,
+        request,
+        com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
+        com.google.protobuf.RpcUtil.generalizeCallback(
+          done,
+          com.example.ex3_2_back.grpc.server.event.EventServerResopnse.class,
+          com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()));
+    }
+
+    public  void updateImageUrl(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
+        com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
+      channel.callMethod(
+        getDescriptor().getMethods().get(6),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
@@ -430,6 +538,11 @@ public  abstract class EventService
   }
 
   public interface BlockingInterface {
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse faceRecognitionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request)
+        throws com.google.protobuf.ServiceException;
+
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse emotionDetectionEvent(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request)
@@ -453,6 +566,11 @@ public  abstract class EventService
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse forbiddenAreaInvasionDetectionEvent(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request)
+        throws com.google.protobuf.ServiceException;
+
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse updateImageUrl(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request)
         throws com.google.protobuf.ServiceException;
   }
 
@@ -463,12 +581,24 @@ public  abstract class EventService
 
     private final com.google.protobuf.BlockingRpcChannel channel;
 
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse faceRecognitionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request)
+        throws com.google.protobuf.ServiceException {
+      return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
+        getDescriptor().getMethods().get(0),
+        controller,
+        request,
+        com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
+    }
+
+
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse emotionDetectionEvent(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request)
         throws com.google.protobuf.ServiceException {
       return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
-        getDescriptor().getMethods().get(0),
+        getDescriptor().getMethods().get(1),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
@@ -480,7 +610,7 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.VolunteerInteractionEventRequest request)
         throws com.google.protobuf.ServiceException {
       return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
-        getDescriptor().getMethods().get(1),
+        getDescriptor().getMethods().get(2),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
@@ -492,7 +622,7 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.StrangerDetectionEventRequest request)
         throws com.google.protobuf.ServiceException {
       return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
-        getDescriptor().getMethods().get(2),
+        getDescriptor().getMethods().get(3),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
@@ -504,7 +634,7 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.FallDetectionEventRequest request)
         throws com.google.protobuf.ServiceException {
       return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
-        getDescriptor().getMethods().get(3),
+        getDescriptor().getMethods().get(4),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
@@ -516,7 +646,19 @@ public  abstract class EventService
         com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request)
         throws com.google.protobuf.ServiceException {
       return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
-        getDescriptor().getMethods().get(4),
+        getDescriptor().getMethods().get(5),
+        controller,
+        request,
+        com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
+    }
+
+
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse updateImageUrl(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request)
+        throws com.google.protobuf.ServiceException {
+      return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
+        getDescriptor().getMethods().get(6),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());

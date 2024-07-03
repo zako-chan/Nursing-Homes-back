@@ -18,4 +18,10 @@ public interface ForbiddenAreaInvasionDetectionEventRequestOrBuilder extends
    */
   com.google.protobuf.ByteString
       getImageUrlBytes();
+
+  /**
+   * <code>int32 cameraId = 2;</code>
+   * @return The cameraId.
+   */
+  int getCameraId();
 }

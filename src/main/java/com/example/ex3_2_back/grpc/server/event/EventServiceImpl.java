@@ -33,15 +33,36 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
                                       StreamObserver<EventServerResopnse> responseObserver) {
         try{
             log.info("emotionDetectionEvent: " + request);
-            EventInfo eventInfo = new EventInfo();
-            eventInfo.setEventType(0);
-            eventInfo.setEventDesc("检测到老人情绪");
-            eventInfo.setEventImgUrl(request.getImageUrl());
-            Elderly elderly = new Elderly();
-            elderly.setId(request.getElderlyId());
-            eventInfo.setElderly(elderly);
+//            EventInfo eventInfo = new EventInfo();
+//            eventInfo.setEventType(0);
+//            eventInfo.setEventDesc("检测到老人情绪");
+//            eventInfo.setEventImgUrl(request.getImageUrl());
+//            Elderly elderly = new Elderly();
+//            elderly.setId(request.getElderlyId());
+//            eventInfo.setElderly(elderly);
+//
+//            eventInfoRepository.save(eventInfo);
+            EventServerResopnse response = EventServerResopnse.newBuilder()
+                    .setMessage("Event created successfully")
+                    .setCode(200)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }catch(Exception e){
+            EventServerResopnse response = EventServerResopnse.newBuilder()
+                    .setMessage("Error occurred: " + e.getMessage())
+                    .setCode(500)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
+    }
 
-            eventInfoRepository.save(eventInfo);
+    @Override
+    public void faceRecognitionEvent(FaceRecognitionEventRequest request,
+                                     StreamObserver<EventServerResopnse> responseObserver) {
+        try{
+            log.info("faceRecognitionEvent: " + request);
             EventServerResopnse response = EventServerResopnse.newBuilder()
                     .setMessage("Event created successfully")
                     .setCode(200)
@@ -64,15 +85,15 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
                                           StreamObserver<EventServerResopnse> responseObserver) {
         try{
             log.info("volunteerInteractionEvent: " + request);
-            EventInfo eventInfo = new EventInfo();
-            eventInfo.setEventType(1);
-            eventInfo.setEventDesc("检测到义工与老人交互");
-            eventInfo.setEventImgUrl(request.getImageUrl());
-            Elderly elderly = new Elderly();
-            elderly.setId(request.getElderlyId());
-            eventInfo.setElderly(elderly);
-
-            eventInfoRepository.save(eventInfo);
+//            EventInfo eventInfo = new EventInfo();
+//            eventInfo.setEventType(1);
+//            eventInfo.setEventDesc("检测到义工与老人交互");
+//            eventInfo.setEventImgUrl(request.getImageUrl());
+//            Elderly elderly = new Elderly();
+//            elderly.setId(request.getElderlyId());
+//            eventInfo.setElderly(elderly);
+//
+//            eventInfoRepository.save(eventInfo);
             EventServerResopnse response = EventServerResopnse.newBuilder()
                     .setMessage("Event created successfully")
                     .setCode(200)
@@ -94,12 +115,12 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
                                        StreamObserver<EventServerResopnse> responseObserver) {
         try{
             log.info("strangerDetectionEvent: " + request);
-            EventInfo eventInfo = new EventInfo();
-            eventInfo.setEventType(2);
-            eventInfo.setEventDesc("检测到陌生人");
-            eventInfo.setEventImgUrl(request.getImageUrl());
-
-            eventInfoRepository.save(eventInfo);
+//            EventInfo eventInfo = new EventInfo();
+//            eventInfo.setEventType(2);
+//            eventInfo.setEventDesc("检测到陌生人");
+//            eventInfo.setEventImgUrl(request.getImageUrl());
+//
+//            eventInfoRepository.save(eventInfo);
             EventServerResopnse response = EventServerResopnse.newBuilder()
                     .setMessage("Event created successfully")
                     .setCode(200)
@@ -127,15 +148,15 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
                                    StreamObserver<EventServerResopnse> responseObserver) {
         try{
             log.info("fallDetectionEvent: " + request);
-            EventInfo eventInfo = new EventInfo();
-            eventInfo.setEventType(3);
-            eventInfo.setEventDesc("检测到有老人摔跤");
-            eventInfo.setEventImgUrl(request.getImageUrl());
-
-            eventInfo = eventInfoRepository.save(eventInfo);
-
-            // 通知管理员
-            webSocket.sendMessage("有老人摔倒，请及时处理，详情见事件"+eventInfo.getId()+"查看");
+//            EventInfo eventInfo = new EventInfo();
+//            eventInfo.setEventType(3);
+//            eventInfo.setEventDesc("检测到有老人摔跤");
+//            eventInfo.setEventImgUrl(request.getImageUrl());
+//
+//            eventInfo = eventInfoRepository.save(eventInfo);
+//
+//            // 通知管理员
+//            webSocket.sendMessage("有老人摔倒，请及时处理，详情见事件"+eventInfo.getId()+"查看");
 
 
             EventServerResopnse response = EventServerResopnse.newBuilder()
@@ -160,12 +181,12 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
                                                     StreamObserver<EventServerResopnse> responseObserver) {
         try{
             log.info("forbiddenAreaInvasionDetectionEvent: " + request);
-            EventInfo eventInfo = new EventInfo();
-            eventInfo.setEventType(4);
-            eventInfo.setEventDesc("检测到老人情绪");
-            eventInfo.setEventImgUrl(request.getImageUrl());
+//            EventInfo eventInfo = new EventInfo();
+//            eventInfo.setEventType(4);
+//            eventInfo.setEventDesc("检测到老人情绪");
+//            eventInfo.setEventImgUrl(request.getImageUrl());
 
-            eventInfoRepository.save(eventInfo);
+//            eventInfoRepository.save(eventInfo);
             EventServerResopnse response = EventServerResopnse.newBuilder()
                     .setMessage("Event created successfully")
                     .setCode(200)
@@ -181,5 +202,26 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
             responseObserver.onCompleted();
         }
 
+    }
+
+    @Override
+    public void updateImageUrl(UpdateImageUrlRequest request,
+                               StreamObserver<EventServerResopnse> responseObserver) {
+        try{
+            log.info("updateImageUrl: " + request);
+            EventServerResopnse response = EventServerResopnse.newBuilder()
+                    .setMessage("Event created successfully")
+                    .setCode(200)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }catch(Exception e){
+            EventServerResopnse response = EventServerResopnse.newBuilder()
+                    .setMessage("Error occurred: " + e.getMessage())
+                    .setCode(500)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
     }
 }

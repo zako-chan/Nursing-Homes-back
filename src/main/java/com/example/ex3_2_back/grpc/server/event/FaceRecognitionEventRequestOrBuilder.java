@@ -3,21 +3,27 @@
 
 package com.example.ex3_2_back.grpc.server.event;
 
-public interface VolunteerInteractionEventRequestOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:event.VolunteerInteractionEventRequest)
+public interface FaceRecognitionEventRequestOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:event.FaceRecognitionEventRequest)
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int32 elderlyId = 1;</code>
-   * @return The elderlyId.
+   * <code>int32 user_id = 1;</code>
+   * @return The userId.
    */
-  int getElderlyId();
+  int getUserId();
 
   /**
-   * <code>int32 volunteerId = 2;</code>
-   * @return The volunteerId.
+   * <code>string identity = 2;</code>
+   * @return The identity.
    */
-  int getVolunteerId();
+  java.lang.String getIdentity();
+  /**
+   * <code>string identity = 2;</code>
+   * @return The bytes for identity.
+   */
+  com.google.protobuf.ByteString
+      getIdentityBytes();
 
   /**
    * <code>string imageUrl = 3;</code>

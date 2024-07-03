@@ -15,6 +15,37 @@ public final class EventServiceGrpc {
   public static final String SERVICE_NAME = "event.EventService";
 
   // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest,
+      com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getFaceRecognitionEventMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FaceRecognitionEvent",
+      requestType = com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest.class,
+      responseType = com.example.ex3_2_back.grpc.server.event.EventServerResopnse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest,
+      com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getFaceRecognitionEventMethod() {
+    io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest, com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getFaceRecognitionEventMethod;
+    if ((getFaceRecognitionEventMethod = EventServiceGrpc.getFaceRecognitionEventMethod) == null) {
+      synchronized (EventServiceGrpc.class) {
+        if ((getFaceRecognitionEventMethod = EventServiceGrpc.getFaceRecognitionEventMethod) == null) {
+          EventServiceGrpc.getFaceRecognitionEventMethod = getFaceRecognitionEventMethod =
+              io.grpc.MethodDescriptor.<com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest, com.example.ex3_2_back.grpc.server.event.EventServerResopnse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FaceRecognitionEvent"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()))
+              .setSchemaDescriptor(new EventServiceMethodDescriptorSupplier("FaceRecognitionEvent"))
+              .build();
+        }
+      }
+    }
+    return getFaceRecognitionEventMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest,
       com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getEmotionDetectionEventMethod;
 
@@ -170,6 +201,37 @@ public final class EventServiceGrpc {
     return getForbiddenAreaInvasionDetectionEventMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest,
+      com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getUpdateImageUrlMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "UpdateImageUrl",
+      requestType = com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest.class,
+      responseType = com.example.ex3_2_back.grpc.server.event.EventServerResopnse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest,
+      com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getUpdateImageUrlMethod() {
+    io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest, com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getUpdateImageUrlMethod;
+    if ((getUpdateImageUrlMethod = EventServiceGrpc.getUpdateImageUrlMethod) == null) {
+      synchronized (EventServiceGrpc.class) {
+        if ((getUpdateImageUrlMethod = EventServiceGrpc.getUpdateImageUrlMethod) == null) {
+          EventServiceGrpc.getUpdateImageUrlMethod = getUpdateImageUrlMethod =
+              io.grpc.MethodDescriptor.<com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest, com.example.ex3_2_back.grpc.server.event.EventServerResopnse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "UpdateImageUrl"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()))
+              .setSchemaDescriptor(new EventServiceMethodDescriptorSupplier("UpdateImageUrl"))
+              .build();
+        }
+      }
+    }
+    return getUpdateImageUrlMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -223,6 +285,13 @@ public final class EventServiceGrpc {
      *    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
      * </pre>
      */
+    default void faceRecognitionEvent(com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request,
+        io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFaceRecognitionEventMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void emotionDetectionEvent(com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request,
         io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getEmotionDetectionEventMethod(), responseObserver);
@@ -254,6 +323,13 @@ public final class EventServiceGrpc {
     default void forbiddenAreaInvasionDetectionEvent(com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request,
         io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getForbiddenAreaInvasionDetectionEventMethod(), responseObserver);
+    }
+
+    /**
+     */
+    default void updateImageUrl(com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
+        io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateImageUrlMethod(), responseObserver);
     }
   }
 
@@ -288,6 +364,14 @@ public final class EventServiceGrpc {
      * <pre>
      *    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
      * </pre>
+     */
+    public void faceRecognitionEvent(com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request,
+        io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFaceRecognitionEventMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
      */
     public void emotionDetectionEvent(com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request,
         io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
@@ -326,6 +410,14 @@ public final class EventServiceGrpc {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getForbiddenAreaInvasionDetectionEventMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void updateImageUrl(com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
+        io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getUpdateImageUrlMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -348,6 +440,13 @@ public final class EventServiceGrpc {
      * <pre>
      *    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
      * </pre>
+     */
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse faceRecognitionEvent(com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFaceRecognitionEventMethod(), getCallOptions(), request);
+    }
+
+    /**
      */
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse emotionDetectionEvent(com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
@@ -381,6 +480,13 @@ public final class EventServiceGrpc {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getForbiddenAreaInvasionDetectionEventMethod(), getCallOptions(), request);
     }
+
+    /**
+     */
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse updateImageUrl(com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getUpdateImageUrlMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -403,6 +509,14 @@ public final class EventServiceGrpc {
      * <pre>
      *    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
      * </pre>
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> faceRecognitionEvent(
+        com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFaceRecognitionEventMethod(), getCallOptions()), request);
+    }
+
+    /**
      */
     public com.google.common.util.concurrent.ListenableFuture<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> emotionDetectionEvent(
         com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest request) {
@@ -441,13 +555,23 @@ public final class EventServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getForbiddenAreaInvasionDetectionEventMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> updateImageUrl(
+        com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getUpdateImageUrlMethod(), getCallOptions()), request);
+    }
   }
 
-  private static final int METHODID_EMOTION_DETECTION_EVENT = 0;
-  private static final int METHODID_VOLUNTEER_INTERACTION_EVENT = 1;
-  private static final int METHODID_STRANGER_DETECTION_EVENT = 2;
-  private static final int METHODID_FALL_DETECTION_EVENT = 3;
-  private static final int METHODID_FORBIDDEN_AREA_INVASION_DETECTION_EVENT = 4;
+  private static final int METHODID_FACE_RECOGNITION_EVENT = 0;
+  private static final int METHODID_EMOTION_DETECTION_EVENT = 1;
+  private static final int METHODID_VOLUNTEER_INTERACTION_EVENT = 2;
+  private static final int METHODID_STRANGER_DETECTION_EVENT = 3;
+  private static final int METHODID_FALL_DETECTION_EVENT = 4;
+  private static final int METHODID_FORBIDDEN_AREA_INVASION_DETECTION_EVENT = 5;
+  private static final int METHODID_UPDATE_IMAGE_URL = 6;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -466,6 +590,10 @@ public final class EventServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_FACE_RECOGNITION_EVENT:
+          serviceImpl.faceRecognitionEvent((com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>) responseObserver);
+          break;
         case METHODID_EMOTION_DETECTION_EVENT:
           serviceImpl.emotionDetectionEvent((com.example.ex3_2_back.grpc.server.event.EmotionDetectionEventRequest) request,
               (io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>) responseObserver);
@@ -486,6 +614,10 @@ public final class EventServiceGrpc {
           serviceImpl.forbiddenAreaInvasionDetectionEvent((com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest) request,
               (io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>) responseObserver);
           break;
+        case METHODID_UPDATE_IMAGE_URL:
+          serviceImpl.updateImageUrl((com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -504,6 +636,13 @@ public final class EventServiceGrpc {
 
   public static final io.grpc.ServerServiceDefinition bindService(AsyncService service) {
     return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+        .addMethod(
+          getFaceRecognitionEventMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.example.ex3_2_back.grpc.server.event.FaceRecognitionEventRequest,
+              com.example.ex3_2_back.grpc.server.event.EventServerResopnse>(
+                service, METHODID_FACE_RECOGNITION_EVENT)))
         .addMethod(
           getEmotionDetectionEventMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
@@ -539,6 +678,13 @@ public final class EventServiceGrpc {
               com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest,
               com.example.ex3_2_back.grpc.server.event.EventServerResopnse>(
                 service, METHODID_FORBIDDEN_AREA_INVASION_DETECTION_EVENT)))
+        .addMethod(
+          getUpdateImageUrlMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest,
+              com.example.ex3_2_back.grpc.server.event.EventServerResopnse>(
+                service, METHODID_UPDATE_IMAGE_URL)))
         .build();
   }
 
@@ -587,11 +733,13 @@ public final class EventServiceGrpc {
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new EventServiceFileDescriptorSupplier())
+              .addMethod(getFaceRecognitionEventMethod())
               .addMethod(getEmotionDetectionEventMethod())
               .addMethod(getVolunteerInteractionEventMethod())
               .addMethod(getStrangerDetectionEventMethod())
               .addMethod(getFallDetectionEventMethod())
               .addMethod(getForbiddenAreaInvasionDetectionEventMethod())
+              .addMethod(getUpdateImageUrlMethod())
               .build();
         }
       }

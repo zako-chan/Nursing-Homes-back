@@ -20,6 +20,11 @@ public final class EventServiceProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_event_EventServerResopnse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_event_FaceRecognitionEventRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_event_FaceRecognitionEventRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_event_EmotionDetectionEventRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -44,6 +49,11 @@ public final class EventServiceProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_event_ForbiddenAreaInvasionDetectionEventRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_event_UpdateImageUrlRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_event_UpdateImageUrlRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -55,29 +65,41 @@ public final class EventServiceProto {
     java.lang.String[] descriptorData = {
       "\n\013event.proto\022\005event\"B\n\023EventServerResop" +
       "nse\022\017\n\007message\030\001 \001(\t\022\014\n\004code\030\002 \001(\005\022\014\n\004da" +
-      "ta\030\003 \001(\t\"C\n\034EmotionDetectionEventRequest" +
-      "\022\021\n\telderlyId\030\001 \001(\005\022\020\n\010imageUrl\030\002 \001(\t\"\\\n" +
-      " VolunteerInteractionEventRequest\022\021\n\teld" +
-      "erlyId\030\001 \001(\005\022\023\n\013volunteerId\030\002 \001(\005\022\020\n\010ima" +
-      "geUrl\030\003 \001(\t\"1\n\035StrangerDetectionEventReq" +
-      "uest\022\020\n\010imageUrl\030\001 \001(\t\"-\n\031FallDetectionE" +
-      "ventRequest\022\020\n\010imageUrl\030\001 \001(\t\">\n*Forbidd" +
-      "enAreaInvasionDetectionEventRequest\022\020\n\010i" +
-      "mageUrl\030\001 \001(\t2\360\003\n\014EventService\022X\n\025Emotio" +
-      "nDetectionEvent\022#.event.EmotionDetection" +
-      "EventRequest\032\032.event.EventServerResopnse" +
-      "\022`\n\031VolunteerInteractionEvent\022\'.event.Vo" +
-      "lunteerInteractionEventRequest\032\032.event.E" +
-      "ventServerResopnse\022Z\n\026StrangerDetectionE" +
-      "vent\022$.event.StrangerDetectionEventReque" +
-      "st\032\032.event.EventServerResopnse\022R\n\022FallDe" +
-      "tectionEvent\022 .event.FallDetectionEventR" +
-      "equest\032\032.event.EventServerResopnse\022t\n#Fo" +
-      "rbiddenAreaInvasionDetectionEvent\0221.even" +
-      "t.ForbiddenAreaInvasionDetectionEventReq" +
-      "uest\032\032.event.EventServerResopnseBB\n(com." +
-      "example.ex3_2_back.grpc.server.eventB\021Ev" +
-      "entServiceProtoP\001\210\001\001b\006proto3"
+      "ta\030\003 \001(\t\"d\n\033FaceRecognitionEventRequest\022" +
+      "\017\n\007user_id\030\001 \001(\005\022\020\n\010identity\030\002 \001(\t\022\020\n\010im" +
+      "ageUrl\030\003 \001(\t\022\020\n\010cameraId\030\004 \001(\005\"f\n\034Emotio" +
+      "nDetectionEventRequest\022\021\n\telderlyId\030\001 \001(" +
+      "\005\022\020\n\010imageUrl\030\002 \001(\t\022\017\n\007emotion\030\003 \001(\t\022\020\n\010" +
+      "cameraId\030\004 \001(\005\"n\n VolunteerInteractionEv" +
+      "entRequest\022\021\n\telderlyId\030\001 \001(\005\022\023\n\013volunte" +
+      "erId\030\002 \001(\005\022\020\n\010imageUrl\030\003 \001(\t\022\020\n\010cameraId" +
+      "\030\004 \001(\005\"C\n\035StrangerDetectionEventRequest\022" +
+      "\020\n\010imageUrl\030\001 \001(\t\022\020\n\010cameraId\030\002 \001(\005\"R\n\031F" +
+      "allDetectionEventRequest\022\020\n\010imageUrl\030\001 \001" +
+      "(\t\022\021\n\telderlyId\030\002 \001(\005\022\020\n\010cameraId\030\003 \001(\005\"" +
+      "P\n*ForbiddenAreaInvasionDetectionEventRe" +
+      "quest\022\020\n\010imageUrl\030\001 \001(\t\022\020\n\010cameraId\030\002 \001(" +
+      "\005\"_\n\025UpdateImageUrlRequest\022\017\n\007user_id\030\001 " +
+      "\001(\005\022\020\n\010identity\030\002 \001(\t\022\020\n\010username\030\003 \001(\t\022" +
+      "\021\n\timage_url\030\004 \001(\t2\224\005\n\014EventService\022V\n\024F" +
+      "aceRecognitionEvent\022\".event.FaceRecognit" +
+      "ionEventRequest\032\032.event.EventServerResop" +
+      "nse\022X\n\025EmotionDetectionEvent\022#.event.Emo" +
+      "tionDetectionEventRequest\032\032.event.EventS" +
+      "erverResopnse\022`\n\031VolunteerInteractionEve" +
+      "nt\022\'.event.VolunteerInteractionEventRequ" +
+      "est\032\032.event.EventServerResopnse\022Z\n\026Stran" +
+      "gerDetectionEvent\022$.event.StrangerDetect" +
+      "ionEventRequest\032\032.event.EventServerResop" +
+      "nse\022R\n\022FallDetectionEvent\022 .event.FallDe" +
+      "tectionEventRequest\032\032.event.EventServerR" +
+      "esopnse\022t\n#ForbiddenAreaInvasionDetectio" +
+      "nEvent\0221.event.ForbiddenAreaInvasionDete" +
+      "ctionEventRequest\032\032.event.EventServerRes" +
+      "opnse\022J\n\016UpdateImageUrl\022\034.event.UpdateIm" +
+      "ageUrlRequest\032\032.event.EventServerResopns" +
+      "eBB\n(com.example.ex3_2_back.grpc.server." +
+      "eventB\021EventServiceProtoP\001\210\001\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -89,36 +111,48 @@ public final class EventServiceProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_EventServerResopnse_descriptor,
         new java.lang.String[] { "Message", "Code", "Data", });
-    internal_static_event_EmotionDetectionEventRequest_descriptor =
+    internal_static_event_FaceRecognitionEventRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_event_FaceRecognitionEventRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_event_FaceRecognitionEventRequest_descriptor,
+        new java.lang.String[] { "UserId", "Identity", "ImageUrl", "CameraId", });
+    internal_static_event_EmotionDetectionEventRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_event_EmotionDetectionEventRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_EmotionDetectionEventRequest_descriptor,
-        new java.lang.String[] { "ElderlyId", "ImageUrl", });
+        new java.lang.String[] { "ElderlyId", "ImageUrl", "Emotion", "CameraId", });
     internal_static_event_VolunteerInteractionEventRequest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_event_VolunteerInteractionEventRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_VolunteerInteractionEventRequest_descriptor,
-        new java.lang.String[] { "ElderlyId", "VolunteerId", "ImageUrl", });
+        new java.lang.String[] { "ElderlyId", "VolunteerId", "ImageUrl", "CameraId", });
     internal_static_event_StrangerDetectionEventRequest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_event_StrangerDetectionEventRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_StrangerDetectionEventRequest_descriptor,
-        new java.lang.String[] { "ImageUrl", });
+        new java.lang.String[] { "ImageUrl", "CameraId", });
     internal_static_event_FallDetectionEventRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_event_FallDetectionEventRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_FallDetectionEventRequest_descriptor,
-        new java.lang.String[] { "ImageUrl", });
+        new java.lang.String[] { "ImageUrl", "ElderlyId", "CameraId", });
     internal_static_event_ForbiddenAreaInvasionDetectionEventRequest_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_event_ForbiddenAreaInvasionDetectionEventRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_ForbiddenAreaInvasionDetectionEventRequest_descriptor,
-        new java.lang.String[] { "ImageUrl", });
+        new java.lang.String[] { "ImageUrl", "CameraId", });
+    internal_static_event_UpdateImageUrlRequest_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_event_UpdateImageUrlRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_event_UpdateImageUrlRequest_descriptor,
+        new java.lang.String[] { "UserId", "Identity", "Username", "ImageUrl", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

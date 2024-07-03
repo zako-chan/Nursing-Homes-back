@@ -25,36 +25,59 @@ message EventServerResopnse{
 //    string eventDescription = 4;
 //    int32 elderlyId = 5;
 //}
+message FaceRecognitionEventRequest{
+    int32 user_id = 1;
+    string identity = 2;
+    string imageUrl = 3;
+    int32 cameraId = 4;
+}
 
 message EmotionDetectionEventRequest{
     int32 elderlyId = 1;
     string imageUrl = 2;
+    string emotion = 3;
+    int32 cameraId = 4;
+
 }
 
 message VolunteerInteractionEventRequest{
     int32 elderlyId = 1;
     int32 volunteerId = 2;
     string imageUrl = 3;
+    int32 cameraId = 4;
 }
 
 message StrangerDetectionEventRequest{
     string imageUrl = 1;
+    int32 cameraId = 2;
 }
 
 message FallDetectionEventRequest{
     string imageUrl = 1;
+    int32 elderlyId = 2;
+    int32 cameraId = 3;
 }
 
 message ForbiddenAreaInvasionDetectionEventRequest{
     string imageUrl = 1;
+    int32 cameraId = 2;
+}
+
+message UpdateImageUrlRequest{
+    int32 user_id = 1;
+    string identity = 2;
+    string username = 3;
+    string image_url = 4;
 }
 
 service EventService {
 //    rpc CreateEvent(EventRequest) returns (EventServerResopnse);
+    rpc FaceRecognitionEvent(FaceRecognitionEventRequest) returns (EventServerResopnse);
     rpc EmotionDetectionEvent(EmotionDetectionEventRequest) returns (EventServerResopnse);
     rpc VolunteerInteractionEvent(VolunteerInteractionEventRequest) returns (EventServerResopnse);
     rpc StrangerDetectionEvent(StrangerDetectionEventRequest) returns (EventServerResopnse);
     rpc FallDetectionEvent(FallDetectionEventRequest) returns (EventServerResopnse);
     rpc ForbiddenAreaInvasionDetectionEvent(ForbiddenAreaInvasionDetectionEventRequest) returns (EventServerResopnse);
+    rpc UpdateImageUrl(UpdateImageUrlRequest) returns (EventServerResopnse);
 }
 
