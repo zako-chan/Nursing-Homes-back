@@ -13,23 +13,13 @@ message EventServerResopnse{
     string data = 3;
 }
 
-// 0-情感检测
-// 1-义工交互
-// 2-陌生人检测
-// 3-跌倒检测
-// 4-禁止区域入侵检测
-//message EventRequest{
-//    int32 eventType = 1;
-//    string eventDate = 2;
-//    string eventLocation = 3;
-//    string eventDescription = 4;
-//    int32 elderlyId = 5;
-//}
+//type 0-代表进门 1-代表出门
 message FaceRecognitionEventRequest{
     int32 user_id = 1;
     string identity = 2;
     string imageUrl = 3;
     int32 cameraId = 4;
+    int32 type = 5;
 }
 
 message EmotionDetectionEventRequest{

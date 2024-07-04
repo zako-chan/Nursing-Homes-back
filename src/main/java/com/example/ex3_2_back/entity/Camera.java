@@ -38,7 +38,35 @@ public class Camera {
     @Column(length = 50)
     private String location;
 
+
     /**
-     *
+     * 删除标志
+     * 类型: boolean
      */
+    @Column
+    private boolean remove;
+
+    /**
+     * 推流地址
+     */
+    @Column
+    private String rtmpUrl;
+
+    /**
+     * 原始视频地址
+     */
+    @Column
+    private String originalUrl;
+
+    /**
+     * 服务处理后的地址
+     */
+    @Column
+    private String processUrl;
+
+    /**
+     * 提供的服务
+     */
+    @Column
+    private Integer service;
 }

@@ -70,6 +70,13 @@ public class EventInfo {
     private String eventImgUrl;
 
     /**
+     * 摄像头id
+     */
+    @ManyToOne
+    @JoinColumn(name = "camera_id", nullable = true)
+    private Camera camera;
+
+    /**
      * 老人id
      * 类型: int
      * 大小: 11
@@ -85,9 +92,16 @@ public class EventInfo {
      * 备注: 和老人信息表的id关联
      */
     @ManyToOne
-    @JoinColumn(name = "elderly_id", nullable = false)
+    @JoinColumn(name = "elderly_id", nullable = true)
     private Elderly elderly;
 
+    @ManyToOne
+    @JoinColumn(name = "volunteer_id",nullable = true)
+    private Volunteer volunteer;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id",nullable = true)
+    private Employee employee;
     @PrePersist
     protected void onCreate() {
         eventDate = new Date();

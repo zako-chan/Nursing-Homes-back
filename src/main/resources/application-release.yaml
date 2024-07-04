@@ -4,7 +4,7 @@ server:
 
 grpc:
   server:
-    port: 9380
+    port: 9999
     inProcessName: test
 client:
   event-service:

@@ -5,18 +5,7 @@ package com.example.ex3_2_back.grpc.server.event;
 
 /**
  * <pre>
- * 0-情感检测
- * 1-义工交互
- * 2-陌生人检测
- * 3-跌倒检测
- * 4-禁止区域入侵检测
- *message EventRequest{
- *    int32 eventType = 1;
- *    string eventDate = 2;
- *    string eventLocation = 3;
- *    string eventDescription = 4;
- *    int32 elderlyId = 5;
- *}
+ *type 0-代表进门 1-代表出门
  * </pre>
  *
  * Protobuf type {@code event.FaceRecognitionEventRequest}
@@ -155,6 +144,17 @@ private static final long serialVersionUID = 0L;
     return cameraId_;
   }
 
+  public static final int TYPE_FIELD_NUMBER = 5;
+  private int type_ = 0;
+  /**
+   * <code>int32 type = 5;</code>
+   * @return The type.
+   */
+  @java.lang.Override
+  public int getType() {
+    return type_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -181,6 +181,9 @@ private static final long serialVersionUID = 0L;
     if (cameraId_ != 0) {
       output.writeInt32(4, cameraId_);
     }
+    if (type_ != 0) {
+      output.writeInt32(5, type_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -203,6 +206,10 @@ private static final long serialVersionUID = 0L;
     if (cameraId_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(4, cameraId_);
+    }
+    if (type_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(5, type_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -227,6 +234,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getImageUrl())) return false;
     if (getCameraId()
         != other.getCameraId()) return false;
+    if (getType()
+        != other.getType()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -246,6 +255,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getImageUrl().hashCode();
     hash = (37 * hash) + CAMERAID_FIELD_NUMBER;
     hash = (53 * hash) + getCameraId();
+    hash = (37 * hash) + TYPE_FIELD_NUMBER;
+    hash = (53 * hash) + getType();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -345,18 +356,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * 0-情感检测
-   * 1-义工交互
-   * 2-陌生人检测
-   * 3-跌倒检测
-   * 4-禁止区域入侵检测
-   *message EventRequest{
-   *    int32 eventType = 1;
-   *    string eventDate = 2;
-   *    string eventLocation = 3;
-   *    string eventDescription = 4;
-   *    int32 elderlyId = 5;
-   *}
+   *type 0-代表进门 1-代表出门
    * </pre>
    *
    * Protobuf type {@code event.FaceRecognitionEventRequest}
@@ -396,6 +396,7 @@ private static final long serialVersionUID = 0L;
       identity_ = "";
       imageUrl_ = "";
       cameraId_ = 0;
+      type_ = 0;
       return this;
     }
 
@@ -440,6 +441,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000008) != 0)) {
         result.cameraId_ = cameraId_;
+      }
+      if (((from_bitField0_ & 0x00000010) != 0)) {
+        result.type_ = type_;
       }
     }
 
@@ -503,6 +507,9 @@ private static final long serialVersionUID = 0L;
       if (other.getCameraId() != 0) {
         setCameraId(other.getCameraId());
       }
+      if (other.getType() != 0) {
+        setType(other.getType());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -549,6 +556,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000008;
               break;
             } // case 32
+            case 40: {
+              type_ = input.readInt32();
+              bitField0_ |= 0x00000010;
+              break;
+            } // case 40
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -770,6 +782,38 @@ private static final long serialVersionUID = 0L;
     public Builder clearCameraId() {
       bitField0_ = (bitField0_ & ~0x00000008);
       cameraId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int type_ ;
+    /**
+     * <code>int32 type = 5;</code>
+     * @return The type.
+     */
+    @java.lang.Override
+    public int getType() {
+      return type_;
+    }
+    /**
+     * <code>int32 type = 5;</code>
+     * @param value The type to set.
+     * @return This builder for chaining.
+     */
+    public Builder setType(int value) {
+
+      type_ = value;
+      bitField0_ |= 0x00000010;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 type = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearType() {
+      bitField0_ = (bitField0_ & ~0x00000010);
+      type_ = 0;
       onChanged();
       return this;
     }

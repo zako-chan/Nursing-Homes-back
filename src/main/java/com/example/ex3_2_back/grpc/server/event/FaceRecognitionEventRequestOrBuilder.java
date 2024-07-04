@@ -42,4 +42,10 @@ public interface FaceRecognitionEventRequestOrBuilder extends
    * @return The cameraId.
    */
   int getCameraId();
+
+  /**
+   * <code>int32 type = 5;</code>
+   * @return The type.
+   */
+  int getType();
 }

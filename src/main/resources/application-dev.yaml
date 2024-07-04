@@ -29,6 +29,10 @@ spring:
     password: "123456789"
     username: root
 
+camera:
+  base-push-url: "rtmp://8.130.148.5"
+  base-pull-url: "http://8.130.148.5:8080"
+
 oss:
   endpoint: "oss-cn-beijing.aliyuncs.com"
   access-key-id: "LTAI5tGuLnH1EvkEG6XhbZqG"
