@@ -9,7 +9,9 @@ import com.example.ex3_2_back.entity.Elderly;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.ElderlyService;
+import com.example.ex3_2_back.service.VisionService;
 import com.example.ex3_2_back.utils.CurrentUser;
+import com.example.ex3_2_back.utils.IdentityConstant;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +33,12 @@ public class ElderlyController {
     @Autowired
     public void setElderlyService(ElderlyService elderlyService) {
         this.elderlyService = elderlyService;
+    }
+
+    VisionService visionService;
+    @Autowired
+    public void setVisionService(VisionService visionService) {
+        this.visionService = visionService;
     }
 
     @GetMapping
@@ -77,6 +85,8 @@ public class ElderlyController {
     @DeleteMapping("/{id}")
     @Operation(summary = "删除老人", description = "删除老人")
     public TResult<Void> deleteElderly(@Schema(description = "老人id") @PathVariable Integer id) {
+        Elderly elderly = elderlyService.getElderlyById(id).orElseThrow(() -> new RuntimeException("老人不存在"));
+        visionService.removeUrl(id, IdentityConstant.ELDERLY, elderly.getUsername());
         elderlyService.removeElderly(id);
         return TResult.success();
     }
@@ -89,5 +99,10 @@ public class ElderlyController {
         return TResult.success(elderlyService.searchElderlyDynamic(elderlySearchDomain,PageRequest.of(page,pageSize)));
     }
 
-
+    //TODO
+    @GetMapping("/face")
+    @Operation(summary = "人脸采集", description = "人脸采集")
+    public TResult faceCollection(){
+        return TResult.success();
+    }
 }

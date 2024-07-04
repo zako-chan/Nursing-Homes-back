@@ -32,6 +32,7 @@ spring:
 camera:
   base-push-url: "rtmp://8.130.148.5"
   base-pull-url: "http://8.130.148.5:8080"
+  stream-url: "http://8.130.148.5:1985/api/v1/streams/"
 
 oss:
   endpoint: "oss-cn-beijing.aliyuncs.com"

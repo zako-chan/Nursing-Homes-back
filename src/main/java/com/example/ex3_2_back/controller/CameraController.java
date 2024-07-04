@@ -5,6 +5,7 @@ import com.example.ex3_2_back.domain.camera.CameraCreateDomain;
 import com.example.ex3_2_back.entity.Camera;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.CameraService;
+import com.example.ex3_2_back.service.VisionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -26,6 +27,12 @@ public class CameraController {
         this.cameraService = cameraService;
     }
 
+    VisionService visionService;
+    @Autowired
+    public void setVisionService(VisionService visionService) {
+        this.visionService = visionService;
+    }
+
     @GetMapping
     @Operation(summary = "查询所有摄像头", description = "查询所有摄像头")
     public TResult<Page<Camera>> allCamera(@Schema(defaultValue = "0") @RequestParam int page,
@@ -44,7 +51,10 @@ public class CameraController {
     @PostMapping("/start/{id}")
     @Operation(summary = "开启摄像头服务", description = "开启摄像头服务")
     public TResult startCamera(@Schema(description = "摄像头id") @PathVariable Integer id){
-        boolean isSuccess =cameraService.startCamera(id);
+        boolean isActivate = cameraService.checkCamera("camera", id.toString());
+        if(!isActivate) throw new RuntimeException("摄像头未推流至指定地址");
+        cameraService.startCamera(id);
         return TResult.success();
     }
+
 }

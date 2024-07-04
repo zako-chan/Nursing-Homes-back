@@ -43,7 +43,7 @@ public class Camera {
      * 删除标志
      * 类型: boolean
      */
-    @Column
+    @Column(columnDefinition = "boolean default false")
     private boolean remove;
 
     /**
@@ -69,4 +69,12 @@ public class Camera {
      */
     @Column
     private Integer service;
+
+
+    /**
+     * 是否开启
+     * 类型: boolean
+     */
+    @Column(columnDefinition = "boolean default false")
+    private boolean isActive;
 }

@@ -242,7 +242,7 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
             eventInfo = eventInfoRepository.save(eventInfo);
 
             // 通知管理员
-            webSocket.sendMessage("有老人摔倒，请及时处理，详情见事件"+eventInfo.getId()+"查看");
+            webSocket.sendMessage("有老人摔倒，请及时处理，详情见事件"+eventInfo.getId()+"点击确认跳转至事件列表");
 
 
             EventServerResopnse response = EventServerResopnse.newBuilder()

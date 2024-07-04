@@ -8,7 +8,9 @@ import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.log.AutoTakeCount;
+import com.example.ex3_2_back.service.VisionService;
 import com.example.ex3_2_back.service.VolunteerService;
+import com.example.ex3_2_back.utils.IdentityConstant;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,6 +30,12 @@ public class VolunteerController {
     @Autowired
     public void setVolunteerService(VolunteerService volunteerService) {
         this.volunteerService = volunteerService;
+    }
+
+    VisionService visionService;
+    @Autowired
+    public void setVisionService(VisionService visionService) {
+        this.visionService = visionService;
     }
 
     @GetMapping
@@ -75,6 +83,8 @@ public class VolunteerController {
     @DeleteMapping("/{id}")
     @Operation(summary = "删除义工", description = "删除义工")
     public TResult deleteVolunteer(@Schema(description = "义工id") @PathVariable Integer id) {
+        Volunteer volunteer = volunteerService.getVolunteerById(id).orElseThrow(() -> new RuntimeException("义工不存在"));
+        visionService.removeUrl(id, IdentityConstant.VOLUNTEER, volunteer.getName());
         volunteerService.deleteVolunteer(id);
         return TResult.success();
     }

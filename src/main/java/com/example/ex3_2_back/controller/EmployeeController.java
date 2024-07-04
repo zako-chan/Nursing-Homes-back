@@ -10,6 +10,8 @@ import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.EmployeeService;
 import com.example.ex3_2_back.domain.employee.EmployeeCreateDomain;
 import com.example.ex3_2_back.entity.Employee;
+import com.example.ex3_2_back.service.VisionService;
+import com.example.ex3_2_back.utils.IdentityConstant;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,6 +31,12 @@ public class EmployeeController {
     @Autowired
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    VisionService visionService;
+    @Autowired
+    public void setVisionService(VisionService visionService) {
+        this.visionService = visionService;
     }
 
     @GetMapping
@@ -76,6 +84,8 @@ public class EmployeeController {
     @DeleteMapping("/{id}")
     @Operation(summary = "删除员工", description = "删除员工")
     public TResult deleteEmployee(@Schema(description = "员工id") @PathVariable Integer id) {
+        Employee employee = employeeService.getEmployeeById(id).orElseThrow(() -> new RuntimeException("员工不存在"));
+        visionService.removeUrl(id, IdentityConstant.EMPLOYEE, employee.getUsername());
         employeeService.removeEmployee(id);
         return TResult.success();
     }

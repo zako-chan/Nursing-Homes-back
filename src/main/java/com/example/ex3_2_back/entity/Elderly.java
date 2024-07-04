@@ -240,7 +240,7 @@ public class Elderly {
      * 删除标志
      * 类型: boolean
      */
-    @Column
+    @Column(columnDefinition = "boolean default false")
     private boolean remove;
 
     @PrePersist

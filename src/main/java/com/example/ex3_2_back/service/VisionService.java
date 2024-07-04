@@ -15,6 +15,9 @@ public class VisionService {
         this.visionServiceBlockingStub = visionServiceBlockingStub;
     }
 
+    /**
+     * 人脸库中添加人脸
+     */
     public void faceCollection(Integer userId,String identity,String username,String pullUrl,String pushUrl){
         FaceCollectionRequest request = FaceCollectionRequest.newBuilder()
                 .setUserId(userId)
@@ -29,6 +32,9 @@ public class VisionService {
         log.info("response: {}", response);
     }
 
+    /**
+     * 删除人脸库中的人脸
+     */
     public void removeUrl(Integer userId,String identity,String username){
         RemoveUrlRequest request = RemoveUrlRequest.newBuilder()
                 .setUserId(userId)
@@ -41,6 +47,9 @@ public class VisionService {
         log.info("response: {}", response);
     }
 
+    /**
+     * 开启计算机视觉端的服务
+     */
     public void startVisionService(Integer cameraId,String pullUrl,String pushUrl,Integer modelId){
         StartVisonServiceRequest request = StartVisonServiceRequest.newBuilder()
                 .setCameraId(cameraId)
