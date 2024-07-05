@@ -100,9 +100,11 @@ public class ElderlyController {
     }
 
     //TODO
-    @GetMapping("/face")
+    @GetMapping("/faceCollection")
     @Operation(summary = "人脸采集", description = "人脸采集")
-    public TResult faceCollection(){
+    public TResult faceCollection(@RequestParam Integer userId,
+                                  @RequestParam String userName) {
+        visionService.faceCollection(userId, IdentityConstant.ELDERLY, userName);
         return TResult.success();
     }
 }

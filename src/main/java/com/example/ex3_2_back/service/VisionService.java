@@ -1,14 +1,24 @@
 package com.example.ex3_2_back.service;
 
 
+import com.example.ex3_2_back.entity.Camera;
 import com.example.ex3_2_back.grpc.server.vision.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
 public class VisionService {
+
+    @Value("${camera.base-push-url}")
+    String basePushUrl;
+
+    @Value("${camera.base-pull-url}")
+    String basePullUrl;
+
+
     VisionServiceGrpc.VisionServiceBlockingStub visionServiceBlockingStub;
     @Autowired
     public void setVisionServiceBlockingStub(VisionServiceGrpc.VisionServiceBlockingStub visionServiceBlockingStub) {
@@ -18,7 +28,9 @@ public class VisionService {
     /**
      * 人脸库中添加人脸
      */
-    public void faceCollection(Integer userId,String identity,String username,String pullUrl,String pushUrl){
+    public void faceCollection(Integer userId,String identity,String username){
+        String pullUrl = basePullUrl + "/face/" + identity + userId;
+        String pushUrl = basePushUrl + "/faceprocess/" + identity + userId;
         FaceCollectionRequest request = FaceCollectionRequest.newBuilder()
                 .setUserId(userId)
                 .setIdentity(identity)
@@ -26,7 +38,7 @@ public class VisionService {
                 .setPullUrl(pullUrl)
                 .setPushUrl(pushUrl)
                 .build();
-
+        
         CommonResopnse response = visionServiceBlockingStub.faceCollection(request);
 
         log.info("response: {}", response);
@@ -50,15 +62,17 @@ public class VisionService {
     /**
      * 开启计算机视觉端的服务
      */
-    public void startVisionService(Integer cameraId,String pullUrl,String pushUrl,Integer modelId){
+    public void startVisionService(Camera camera){
+        String pushUrl = basePushUrl + "/process/" + camera.getId();
         StartVisonServiceRequest request = StartVisonServiceRequest.newBuilder()
-                .setCameraId(cameraId)
-                .setPullUrl(pullUrl)
+                .setCameraId(camera.getId())
+                .setPullUrl(camera.getOriginalUrl())
                 .setPushUrl(pushUrl)
-                .setModelId(modelId)
+                .setModelId(camera.getService())
                 .build();
         CommonResopnse response = visionServiceBlockingStub.startVisonService(request);
 
         log.info("response: {}", response);
     }
+
 }

@@ -48,7 +48,7 @@ public class CameraService {
         Camera camera = cameraRepository.save(Camera.builder().location(location).build());
         camera.setRtmpUrl(basePushUrl + "/camera/" +camera.getId());
         camera.setProcessUrl(basePullUrl +"/process/"+ camera.getId() + ".flv");
-        camera.setOriginalUrl(basePushUrl + "/camera/"+camera.getId() + ".flv");
+        camera.setOriginalUrl(basePullUrl + "/camera/"+camera.getId() + ".flv");
         cameraRepository.save(camera);
         return camera;
     }
@@ -75,5 +75,9 @@ public class CameraService {
             }
         }
         return true;
+    }
+
+    public Optional<Camera> getCameraById(Integer id){
+        return cameraRepository.findById(id);
     }
 }

@@ -97,4 +97,12 @@ public class EmployeeController {
                                                 @RequestParam int pageSize) {
         return TResult.success(employeeService.searchEmployeeDynamic(employeeSearchDomain,PageRequest.of(page,pageSize)));
     }
+
+    @GetMapping("/faceCollection")
+    @Operation(summary = "人脸采集", description = "人脸采集")
+    public TResult faceCollection(@RequestParam Integer userId,
+                                  @RequestParam String userName) {
+        visionService.faceCollection(userId, IdentityConstant.EMPLOYEE, userName);
+        return TResult.success();
+    }
 }

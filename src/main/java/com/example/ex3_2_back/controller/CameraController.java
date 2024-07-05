@@ -53,7 +53,9 @@ public class CameraController {
     public TResult startCamera(@Schema(description = "摄像头id") @PathVariable Integer id){
         boolean isActivate = cameraService.checkCamera("camera", id.toString());
         if(!isActivate) throw new RuntimeException("摄像头未推流至指定地址");
+        Camera camera = cameraService.getCameraById(id).orElse(null);
         cameraService.startCamera(id);
+        visionService.startVisionService(camera);
         return TResult.success();
     }
 

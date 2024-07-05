@@ -96,4 +96,12 @@ public class VolunteerController {
                                                 @RequestParam int pageSize) {
         return TResult.success(volunteerService.searchVolunteerDynamic(volunteerSearchDomain,PageRequest.of(page,pageSize)));
     }
+
+    @GetMapping("/faceCollection")
+    @Operation(summary = "人脸采集", description = "人脸采集")
+    public TResult faceCollection(@RequestParam Integer userId,
+                                  @RequestParam String userName) {
+        visionService.faceCollection(userId, IdentityConstant.VOLUNTEER, userName);
+        return TResult.success();
+    }
 }
