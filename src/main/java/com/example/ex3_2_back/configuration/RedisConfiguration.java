@@ -1,6 +1,7 @@
 package com.example.ex3_2_back.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -8,10 +9,17 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import redis.clients.jedis.Jedis;
 
 //Redis配置类
 @Configuration
 public class RedisConfiguration {
+
+    @Value("${spring.data.redis.host}")
+    String host;
+
+    @Value("${spring.data.redis.port}")
+    Integer port;
 
     // 注入Redis连接工厂，用于创建Redis连接
     @Autowired
@@ -44,6 +52,11 @@ public class RedisConfiguration {
         // 设置连接工厂
         template.setConnectionFactory(factory);
         return template;
+    }
+
+    @Bean
+    public Jedis jedis() {
+        return new Jedis(host, port);
     }
 
 }

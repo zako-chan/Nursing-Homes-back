@@ -3,6 +3,8 @@ package com.example.ex3_2_back.controller;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.camera.CameraCreateDomain;
 import com.example.ex3_2_back.entity.Camera;
+import com.example.ex3_2_back.exception.ResourceAlreadyExistsException;
+import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.CameraService;
 import com.example.ex3_2_back.service.VisionService;
@@ -44,7 +46,7 @@ public class CameraController {
     @PostMapping
     @Operation(summary = "添加摄像头", description = "添加摄像头")
     public TResult<Integer> addCamera(@RequestBody CameraCreateDomain cameraCreateDomain){
-        Camera camera1 = cameraService.addCamera(cameraCreateDomain.getLocation());
+        Camera camera1 = cameraService.addCamera(cameraCreateDomain.getLocation(),cameraCreateDomain.getService());
         return TResult.success(camera1.getId());
     }
 
@@ -53,9 +55,11 @@ public class CameraController {
     public TResult startCamera(@Schema(description = "摄像头id") @PathVariable Integer id){
         boolean isActivate = cameraService.checkCamera("camera", id.toString());
         if(!isActivate) throw new RuntimeException("摄像头未推流至指定地址");
-        Camera camera = cameraService.getCameraById(id).orElse(null);
+        Camera camera = cameraService.getCameraById(id).orElseThrow(()-> new ResourceNotExistException("摄像头不存在"));
         cameraService.startCamera(id);
         visionService.startVisionService(camera);
+        camera.setActive(true);
+        cameraService.saveCamera(camera);
         return TResult.success();
     }
 

@@ -44,8 +44,8 @@ public class CameraService {
 //        this.visionService = visionService;
 //    }
 
-    public Camera addCamera(String location){
-        Camera camera = cameraRepository.save(Camera.builder().location(location).build());
+    public Camera addCamera(String location,Integer serviceId){
+        Camera camera = cameraRepository.save(Camera.builder().location(location).service(serviceId).build());
         camera.setRtmpUrl(basePushUrl + "/camera/" +camera.getId());
         camera.setProcessUrl(basePullUrl +"/process/"+ camera.getId() + ".flv");
         camera.setOriginalUrl(basePullUrl + "/camera/"+camera.getId() + ".flv");
@@ -79,5 +79,9 @@ public class CameraService {
 
     public Optional<Camera> getCameraById(Integer id){
         return cameraRepository.findById(id);
+    }
+
+    public void saveCamera(Camera camera){
+        cameraRepository.save(camera);
     }
 }
