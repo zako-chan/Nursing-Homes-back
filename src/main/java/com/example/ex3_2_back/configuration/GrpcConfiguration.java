@@ -22,6 +22,7 @@ public class GrpcConfiguration {
     @Value("${grpc.server.port}")
     Integer port = 9380;
 
+
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
