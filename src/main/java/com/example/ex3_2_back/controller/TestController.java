@@ -31,7 +31,7 @@ public class TestController {
     public String test() {
         // 创建请求
         Model1RequestMessage requestMessage = Model1RequestMessage.newBuilder()
-                .setModelId("0")
+                .setModelId("1")
                 .build();
         // 发送请求
         Model1ResponseMessage responseMessage = greeterBlockingStub.model1Request(requestMessage);

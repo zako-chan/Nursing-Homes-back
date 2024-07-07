@@ -50,16 +50,43 @@ public class CameraController {
         return TResult.success(camera1.getId());
     }
 
+    //TODO :记得打开
     @PostMapping("/start/{id}")
     @Operation(summary = "开启摄像头服务", description = "开启摄像头服务")
     public TResult startCamera(@Schema(description = "摄像头id") @PathVariable Integer id){
-        boolean isActivate = cameraService.checkCamera("camera", id.toString());
-        if(!isActivate) throw new RuntimeException("摄像头未推流至指定地址");
+//        boolean isActivate = cameraService.checkCamera("camera", id.toString());
+//        if(!isActivate) throw new RuntimeException("摄像头未推流至指定地址");
         Camera camera = cameraService.getCameraById(id).orElseThrow(()-> new ResourceNotExistException("摄像头不存在"));
         cameraService.startCamera(id);
         visionService.startVisionService(camera);
         camera.setActive(true);
         cameraService.saveCamera(camera);
+        return TResult.success();
+    }
+
+    @PostMapping("/stop/{id}")
+    @Operation(summary = "关闭摄像头服务", description = "关闭摄像头服务")
+    public TResult stopCamera(@Schema(description = "摄像头id") @PathVariable Integer id){
+        Camera camera = cameraService.getCameraById(id).orElseThrow(()-> new ResourceNotExistException("摄像头不存在"));
+        if(camera.isActive() == false) {
+            throw new RuntimeException("服务未开启");
+        }
+        camera.setActive(false);
+        cameraService.saveCamera(camera);
+        camera.setService(0);
+        visionService.startVisionService(camera);
+        return TResult.success();
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "删除摄像头", description = "删除摄像头")
+    public TResult deleteCamera(@Schema(description = "摄像头id") @PathVariable Integer id){
+        Camera camera = cameraService.getCameraById(id).orElseThrow(()-> new ResourceNotExistException("摄像头不存在"));
+        if(camera.isActive() == true) {
+            camera.setService(0);
+            visionService.startVisionService(camera);
+        }
+        cameraService.removeCamera(id);
         return TResult.success();
     }
 

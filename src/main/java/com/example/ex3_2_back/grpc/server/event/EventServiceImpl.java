@@ -64,7 +64,7 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
             log.info("emotionDetectionEvent: " + request);
             EventInfo eventInfo = EventInfo.builder()
                     .eventType(0)
-                    .eventDesc("检测到老人情绪")
+                    .eventDesc(request.getEmotion())
                     .eventImgUrl(request.getImageUrl())
                     .camera(Camera.builder().id(request.getCameraId()).build())
                     .elderly(Elderly.builder().id(request.getElderlyId()).build())

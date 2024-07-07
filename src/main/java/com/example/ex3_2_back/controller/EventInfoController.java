@@ -2,6 +2,9 @@ package com.example.ex3_2_back.controller;
 
 
 import com.example.ex3_2_back.domain.TResult;
+import com.example.ex3_2_back.domain.count.EmotionCount;
+import com.example.ex3_2_back.domain.count.EventCountDTO;
+import com.example.ex3_2_back.domain.count.Interaction;
 import com.example.ex3_2_back.entity.EventInfo;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.EventInfoService;
@@ -15,6 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/eventinfo")
@@ -34,5 +40,17 @@ public class EventInfoController {
 
         Page<EventInfo> eventInfos = eventInfoService.getAllEvent(PageRequest.of(page,pageSize));
         return TResult.success(eventInfos);
+    }
+
+    @GetMapping("/elderly")
+    @Operation(summary = "心情统计", description = "老年人心情事件统计")
+    public TResult<Map<String,Long>> getEventCounts(@RequestParam int elderlyId) {
+        return TResult.success(eventInfoService.getEventDescCounts(elderlyId));
+    }
+
+    @GetMapping("/volunteer")
+    @Operation(summary = "事件统计", description = "义工事件统计，查找义工交互次数前5")
+    public TResult<List<Interaction>> getTopInteractionCounts() {
+        return TResult.success(eventInfoService.getTopVolunteersByEventType(1,5));
     }
 }

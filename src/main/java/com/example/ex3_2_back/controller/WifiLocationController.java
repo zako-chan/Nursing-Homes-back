@@ -7,6 +7,8 @@ import com.example.ex3_2_back.entity.Position;
 import com.example.ex3_2_back.entity.WifiInfo;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.WifiLocationService;
+import com.example.ex3_2_back.utils.LoginNotRequire;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +31,24 @@ public class WifiLocationController {
         this.wifiLocationService = wifiLocationService;
     }
 
+    @LoginNotRequire
     @PostMapping("/trainData")
+    @Operation(summary = "上传训练数据", description = "上传训练数据")
     public String uploadTrainData(@RequestBody Position position) {
         wifiLocationService.savePosition(position);
         return "success";
     }
 
+    @LoginNotRequire
     @PostMapping("/predict")
+    @Operation(summary = "预测位置", description = "预测位置")
     public void predictPosition(@RequestBody LocationData locationData) {
         Position position = wifiLocationService.predictPosition(locationData.getWifiInfos());
         wifiLocationService.savePrePosition(locationData.getId(), position);
     }
 
     @GetMapping("/positions")
+    @Operation(summary = "获取所有位置", description = "获取所有位置")
     public List<ElderlyPosition> getAllPositions() {
         return wifiLocationService.getAllElderlyPositions();
     }

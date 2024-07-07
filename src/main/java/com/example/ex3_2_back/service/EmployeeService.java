@@ -1,9 +1,8 @@
 package com.example.ex3_2_back.service;
 
 
+import com.example.ex3_2_back.domain.count.AgeGroupCountDTO;
 import com.example.ex3_2_back.domain.employee.EmployeeSearchDomain;
-import com.example.ex3_2_back.domain.employee.EmployeeSearchDomain;
-import com.example.ex3_2_back.entity.Employee;
 import com.example.ex3_2_back.entity.Employee;
 import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.EmployeeRepository;
@@ -13,16 +12,14 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.http.client.utils.Rfc3492Idn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -115,5 +112,64 @@ public class EmployeeService {
         };
 
         return employeeRepository.findAll(queryCondition, pageable);
+    }
+
+    public List<AgeGroupCountDTO> getAgeGroupCounts() {
+        List<Date> birthdays = employeeRepository.findAllBirthdays();
+        Map<String, Integer> ageGroupCounts = initializeAgeGroups();
+
+        for (Date birthday : birthdays) {
+            int age = calculateAge(birthday);
+            String ageGroup = determineAgeGroup(age);
+            ageGroupCounts.put(ageGroup, ageGroupCounts.getOrDefault(ageGroup, 0) + 1);
+        }
+
+        return ageGroupCounts.entrySet().stream()
+                .map(entry -> new AgeGroupCountDTO(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, Integer> initializeAgeGroups() {
+        Map<String, Integer> ageGroupCounts = new LinkedHashMap<>();
+        ageGroupCounts.put("25-30", 0);
+        ageGroupCounts.put("31-35", 0);
+        ageGroupCounts.put("36-40", 0);
+        ageGroupCounts.put("41-45", 0);
+        ageGroupCounts.put("46-50", 0);
+        ageGroupCounts.put("51-55", 0);
+        ageGroupCounts.put("56-60", 0);
+        ageGroupCounts.put("61-65", 0);
+        ageGroupCounts.put("66-70", 0);
+        ageGroupCounts.put("71-75", 0);
+        ageGroupCounts.put("76-80", 0);
+        ageGroupCounts.put("80+", 0);
+        return ageGroupCounts;
+    }
+
+    private int calculateAge(Date birthday) {
+        Calendar birth = Calendar.getInstance();
+        birth.setTime(birthday);
+        Calendar today = Calendar.getInstance();
+        int age = today.get(Calendar.YEAR) - birth.get(Calendar.YEAR);
+        if (today.get(Calendar.DAY_OF_YEAR) < birth.get(Calendar.DAY_OF_YEAR)) {
+            age--;
+        }
+        return age;
+    }
+
+    private String determineAgeGroup(int age) {
+        if (age >= 80) return "80+";
+        if (age >= 76) return "76-80";
+        if (age >= 71) return "71-75";
+        if (age >= 66) return "66-70";
+        if (age >= 61) return "61-65";
+        if (age >= 56) return "56-60";
+        if (age >= 51) return "51-55";
+        if (age >= 46) return "46-50";
+        if (age >= 41) return "41-45";
+        if (age >= 36) return "36-40";
+        if (age >= 31) return "31-35";
+        if (age >= 25) return "25-30";
+        return "Under 25";  // 这里可以根据你的需求添加更多年龄段
     }
 }

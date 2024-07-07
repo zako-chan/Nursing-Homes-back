@@ -2,25 +2,28 @@ package com.example.ex3_2_back.controller;
 
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
+import com.example.ex3_2_back.domain.count.AgeGroupCountDTO;
 import com.example.ex3_2_back.domain.TResult;
+import com.example.ex3_2_back.domain.count.EventCountDTO;
 import com.example.ex3_2_back.domain.elderly.ElderlyCreateDomain;
 import com.example.ex3_2_back.domain.elderly.ElderlySearchDomain;
 import com.example.ex3_2_back.entity.Elderly;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.ElderlyService;
+import com.example.ex3_2_back.service.EventInfoService;
 import com.example.ex3_2_back.service.VisionService;
-import com.example.ex3_2_back.utils.CurrentUser;
 import com.example.ex3_2_back.utils.IdentityConstant;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.websocket.server.PathParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/elderly")
@@ -41,6 +44,11 @@ public class ElderlyController {
         this.visionService = visionService;
     }
 
+    EventInfoService eventInfoService;
+    @Autowired
+    public void setEventInfoService(EventInfoService eventInfoService) {
+        this.eventInfoService = eventInfoService;
+    }
     @GetMapping
     @Operation(summary = "查询所有老人", description = "查询所有老人")
     public TResult<Page<Elderly>> allElderly(@Schema(defaultValue = "0") @RequestParam int page,
@@ -107,4 +115,11 @@ public class ElderlyController {
         visionService.faceCollection(userId, IdentityConstant.ELDERLY, userName);
         return TResult.success();
     }
+
+    @GetMapping("/ageGroups")
+    @Operation(summary = "数据统计", description = "老年人年龄数据统计")
+    public TResult<List<AgeGroupCountDTO>> getAgeGroupCounts() {
+        return TResult.success(elderlyService.getAgeGroupCounts());
+    }
+
 }

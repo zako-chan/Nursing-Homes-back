@@ -2,10 +2,7 @@ package com.example.ex3_2_back.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -15,7 +12,9 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "position")
-@Data
+//@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -31,12 +30,16 @@ public class Position {
 
     private double z;
 
-    @OneToMany(mappedBy = "position",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "position",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<WifiInfo> wifiInfos;
 
     public Position(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public String toString(){
+        return "x:"+x+" y:"+y+" z:"+z;
     }
 }

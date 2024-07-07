@@ -1,10 +1,9 @@
 package com.example.ex3_2_back.controller;
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
+import com.example.ex3_2_back.domain.count.AgeGroupCountDTO;
 import com.example.ex3_2_back.domain.TResult;
-import com.example.ex3_2_back.domain.elderly.ElderlySearchDomain;
 import com.example.ex3_2_back.domain.employee.EmployeeSearchDomain;
-import com.example.ex3_2_back.entity.Elderly;
 import com.example.ex3_2_back.entity.User;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.EmployeeService;
@@ -19,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -104,5 +105,11 @@ public class EmployeeController {
                                   @RequestParam String userName) {
         visionService.faceCollection(userId, IdentityConstant.EMPLOYEE, userName);
         return TResult.success();
+    }
+
+    @GetMapping("/ageGroups")
+    @Operation(summary = "数据统计", description = "工作人员年龄数据统计")
+    public TResult<List<AgeGroupCountDTO>> getAgeGroupCounts() {
+        return TResult.success(employeeService.getAgeGroupCounts());
     }
 }

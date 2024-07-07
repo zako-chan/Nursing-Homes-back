@@ -3,7 +3,10 @@ package com.example.ex3_2_back.service;
 
 import com.example.ex3_2_back.domain.camera.StreamResponse;
 import com.example.ex3_2_back.entity.Camera;
+import com.example.ex3_2_back.entity.Elderly;
+import com.example.ex3_2_back.exception.ResourceNotExistException;
 import com.example.ex3_2_back.repository.CameraRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class CameraService {
 
     @Value("${camera.base-push-url}")
@@ -28,6 +32,7 @@ public class CameraService {
     String streamUrl;
 
     RestTemplate restTemplate;
+    @Autowired
     public void setRestTemplate (RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }
@@ -69,12 +74,12 @@ public class CameraService {
         ResponseEntity<StreamResponse> response = restTemplate.getForEntity(streamUrl, StreamResponse.class);
         if(response.getStatusCode().is2xxSuccessful() && response.getBody() != null){
             for(StreamResponse.Stream stream : response.getBody().getStreams()){
-                if(StringUtils.equals(stream.getApp(), app) && StringUtils.equals(stream.getId(), cameraId)){
+                if(StringUtils.equals(stream.getApp(), app) && StringUtils.equals(stream.getName(), cameraId)){
                     return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public Optional<Camera> getCameraById(Integer id){
@@ -83,5 +88,18 @@ public class CameraService {
 
     public void saveCamera(Camera camera){
         cameraRepository.save(camera);
+    }
+
+    /**
+     * 删除摄像头
+     */
+    public void removeCamera(Integer id) {
+        Optional<Camera> camera = cameraRepository.findById(id);
+        if (camera.isPresent()) {
+            camera.get().setRemove(true);
+            cameraRepository.save(camera.get());
+        } else {
+            throw new ResourceNotExistException("摄像头不存在");
+        }
     }
 }

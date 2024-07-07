@@ -4,7 +4,7 @@ server:
 
 grpc:
   server:
-    port: 9380
+    port: 9999
     inProcessName: test
 client:
   event-service:
@@ -54,13 +54,13 @@ oss:
 logging:
   level:
     root: info  # 根日志级别设置为info，将会记录info及以上级别的日志
-    com.example.ex3_2_back: debug  # 指定某个包的日志级别为debug
-    org.hibernate.SQL: trace
-    org:
-      hibernate:
-        orm:
-          jdbc:
-            bind: trace
+#    com.example.ex3_2_back: debug  # 指定某个包的日志级别为debug
+#    org.hibernate.SQL: trace
+#    org:
+#      hibernate:
+#        orm:
+#          jdbc:
+#            bind: trace
   file:
     name: app.log   # 指定日志文件名称
   pattern:

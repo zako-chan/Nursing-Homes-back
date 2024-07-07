@@ -1,12 +1,12 @@
 package com.example.ex3_2_back.controller;
 
 import com.example.ex3_2_back.annotations.CurrentUserId;
+import com.example.ex3_2_back.domain.count.AgeGroupCountDTO;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.volunteer.VolunteerSearchDomain;
 import com.example.ex3_2_back.domain.volunteer.VolunteerCreateDomain;
 import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.entity.User;
-import com.example.ex3_2_back.entity.Volunteer;
 import com.example.ex3_2_back.log.AutoTakeCount;
 import com.example.ex3_2_back.service.VisionService;
 import com.example.ex3_2_back.service.VolunteerService;
@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/volunteer")
@@ -103,5 +105,11 @@ public class VolunteerController {
                                   @RequestParam String userName) {
         visionService.faceCollection(userId, IdentityConstant.VOLUNTEER, userName);
         return TResult.success();
+    }
+
+    @GetMapping("/ageGroups")
+    @Operation(summary = "数据统计", description = "义工年龄数据统计")
+    public TResult<List<AgeGroupCountDTO>> getAgeGroupCounts() {
+        return TResult.success(volunteerService.getAgeGroupCounts());
     }
 }
