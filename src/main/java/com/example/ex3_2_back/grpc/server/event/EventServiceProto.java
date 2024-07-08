@@ -50,6 +50,11 @@ public final class EventServiceProto {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_event_ForbiddenAreaInvasionDetectionEventRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_event_FireDetectionEventRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_event_FireDetectionEventRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
     internal_static_event_UpdateImageUrlRequest_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -73,34 +78,38 @@ public final class EventServiceProto {
       "tion\030\003 \001(\t\022\020\n\010cameraId\030\004 \001(\005\"n\n Voluntee" +
       "rInteractionEventRequest\022\021\n\telderlyId\030\001 " +
       "\001(\005\022\023\n\013volunteerId\030\002 \001(\005\022\020\n\010imageUrl\030\003 \001" +
-      "(\t\022\020\n\010cameraId\030\004 \001(\005\"C\n\035StrangerDetectio" +
+      "(\t\022\020\n\010cameraId\030\004 \001(\005\"W\n\035StrangerDetectio" +
       "nEventRequest\022\020\n\010imageUrl\030\001 \001(\t\022\020\n\010camer" +
-      "aId\030\002 \001(\005\"R\n\031FallDetectionEventRequest\022\020" +
-      "\n\010imageUrl\030\001 \001(\t\022\021\n\telderlyId\030\002 \001(\005\022\020\n\010c" +
-      "ameraId\030\003 \001(\005\"P\n*ForbiddenAreaInvasionDe" +
-      "tectionEventRequest\022\020\n\010imageUrl\030\001 \001(\t\022\020\n" +
-      "\010cameraId\030\002 \001(\005\"_\n\025UpdateImageUrlRequest" +
-      "\022\017\n\007user_id\030\001 \001(\005\022\020\n\010identity\030\002 \001(\t\022\020\n\010u" +
-      "sername\030\003 \001(\t\022\021\n\timage_url\030\004 \001(\t2\224\005\n\014Eve" +
-      "ntService\022V\n\024FaceRecognitionEvent\022\".even" +
-      "t.FaceRecognitionEventRequest\032\032.event.Ev" +
-      "entServerResopnse\022X\n\025EmotionDetectionEve" +
-      "nt\022#.event.EmotionDetectionEventRequest\032" +
-      "\032.event.EventServerResopnse\022`\n\031Volunteer" +
-      "InteractionEvent\022\'.event.VolunteerIntera" +
-      "ctionEventRequest\032\032.event.EventServerRes" +
-      "opnse\022Z\n\026StrangerDetectionEvent\022$.event." +
-      "StrangerDetectionEventRequest\032\032.event.Ev" +
-      "entServerResopnse\022R\n\022FallDetectionEvent\022" +
-      " .event.FallDetectionEventRequest\032\032.even" +
-      "t.EventServerResopnse\022t\n#ForbiddenAreaIn" +
-      "vasionDetectionEvent\0221.event.ForbiddenAr" +
-      "eaInvasionDetectionEventRequest\032\032.event." +
-      "EventServerResopnse\022J\n\016UpdateImageUrl\022\034." +
-      "event.UpdateImageUrlRequest\032\032.event.Even" +
-      "tServerResopnseBB\n(com.example.ex3_2_bac" +
-      "k.grpc.server.eventB\021EventServiceProtoP\001" +
-      "\210\001\001b\006proto3"
+      "aId\030\002 \001(\005\022\022\n\nstrangerId\030\003 \001(\005\"R\n\031FallDet" +
+      "ectionEventRequest\022\020\n\010imageUrl\030\001 \001(\t\022\021\n\t" +
+      "elderlyId\030\002 \001(\005\022\020\n\010cameraId\030\003 \001(\005\"P\n*For" +
+      "biddenAreaInvasionDetectionEventRequest\022" +
+      "\020\n\010imageUrl\030\001 \001(\t\022\020\n\010cameraId\030\002 \001(\005\"?\n\031F" +
+      "ireDetectionEventRequest\022\020\n\010imageUrl\030\001 \001" +
+      "(\t\022\020\n\010cameraId\030\002 \001(\005\"_\n\025UpdateImageUrlRe" +
+      "quest\022\017\n\007user_id\030\001 \001(\005\022\020\n\010identity\030\002 \001(\t" +
+      "\022\020\n\010username\030\003 \001(\t\022\021\n\timage_url\030\004 \001(\t2\350\005" +
+      "\n\014EventService\022V\n\024FaceRecognitionEvent\022\"" +
+      ".event.FaceRecognitionEventRequest\032\032.eve" +
+      "nt.EventServerResopnse\022X\n\025EmotionDetecti" +
+      "onEvent\022#.event.EmotionDetectionEventReq" +
+      "uest\032\032.event.EventServerResopnse\022`\n\031Volu" +
+      "nteerInteractionEvent\022\'.event.VolunteerI" +
+      "nteractionEventRequest\032\032.event.EventServ" +
+      "erResopnse\022Z\n\026StrangerDetectionEvent\022$.e" +
+      "vent.StrangerDetectionEventRequest\032\032.eve" +
+      "nt.EventServerResopnse\022R\n\022FallDetectionE" +
+      "vent\022 .event.FallDetectionEventRequest\032\032" +
+      ".event.EventServerResopnse\022t\n#ForbiddenA" +
+      "reaInvasionDetectionEvent\0221.event.Forbid" +
+      "denAreaInvasionDetectionEventRequest\032\032.e" +
+      "vent.EventServerResopnse\022R\n\022FireDetectio" +
+      "nEvent\022 .event.FireDetectionEventRequest" +
+      "\032\032.event.EventServerResopnse\022J\n\016UpdateIm" +
+      "ageUrl\022\034.event.UpdateImageUrlRequest\032\032.e" +
+      "vent.EventServerResopnseBB\n(com.example." +
+      "ex3_2_back.grpc.server.eventB\021EventServi" +
+      "ceProtoP\001\210\001\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -135,7 +144,7 @@ public final class EventServiceProto {
     internal_static_event_StrangerDetectionEventRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_StrangerDetectionEventRequest_descriptor,
-        new java.lang.String[] { "ImageUrl", "CameraId", });
+        new java.lang.String[] { "ImageUrl", "CameraId", "StrangerId", });
     internal_static_event_FallDetectionEventRequest_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_event_FallDetectionEventRequest_fieldAccessorTable = new
@@ -148,8 +157,14 @@ public final class EventServiceProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_ForbiddenAreaInvasionDetectionEventRequest_descriptor,
         new java.lang.String[] { "ImageUrl", "CameraId", });
-    internal_static_event_UpdateImageUrlRequest_descriptor =
+    internal_static_event_FireDetectionEventRequest_descriptor =
       getDescriptor().getMessageTypes().get(7);
+    internal_static_event_FireDetectionEventRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_event_FireDetectionEventRequest_descriptor,
+        new java.lang.String[] { "ImageUrl", "CameraId", });
+    internal_static_event_UpdateImageUrlRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
     internal_static_event_UpdateImageUrlRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_event_UpdateImageUrlRequest_descriptor,

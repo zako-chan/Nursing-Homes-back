@@ -34,7 +34,12 @@ public class EventInfo {
      * 事件类型
      * 类型: int
      * 大小: 11
-     * 备注: 0代表情感检测，1代表义工交互检测，2代表陌生人检测，3代表摔倒检测，4代表禁止区域入侵检测
+     * 备注: 0代表情感检测，
+     * 1代表义工交互检测，
+     * 2代表陌生人检测，
+     * 3代表摔倒检测，
+     * 4代表禁止区域入侵检测
+     * 5火灾
      */
     @Column
     private int eventType;
@@ -102,6 +107,9 @@ public class EventInfo {
     @ManyToOne
     @JoinColumn(name = "employee_id",nullable = true)
     private Employee employee;
+
+    private Integer strangerId;
+
     @PrePersist
     protected void onCreate() {
         eventDate = new Date();

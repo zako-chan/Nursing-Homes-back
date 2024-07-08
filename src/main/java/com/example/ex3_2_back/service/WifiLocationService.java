@@ -84,6 +84,12 @@ public class WifiLocationService {
                 .sorted(Map.Entry.comparingByValue())
                 .limit(K)
                 .collect(Collectors.toList());
+        Optional<Map.Entry<Position, Double>> zeroDistanceEntry = distanceMap.entrySet().stream()
+                .filter(entry -> entry.getValue() == 0)
+                .findFirst();
+        if(zeroDistanceEntry.isPresent()){
+            return zeroDistanceEntry.get().getKey();
+        }
         log.info("nearestNeighbors: {}", nearestNeighbors);
         // 计算加权平均值，作为预测位置
         double x = 0, y = 0, z = 0;
@@ -116,6 +122,9 @@ public class WifiLocationService {
         return predictedPosition;
     }
 
+    /**
+     * 计算两个位置之间的距离（欧氏距离）
+     */
     private double calculateDistance(Position position, List<WifiInfo> inputWiFiInfos) {
         Set<WifiInfo> positionWiFiInfos = position.getWifiInfos();
         double distance = 0;
@@ -135,6 +144,10 @@ public class WifiLocationService {
         }
         return distance;
     }
+
+    /**
+     * 计算两个位置之间的距离（bssid只取前x个leve）
+     */
     private double calculateDistance(Position position, List<WifiInfo> inputWiFiInfos, int x) {
         Set<WifiInfo> positionWiFiInfos = position.getWifiInfos();
         PriorityQueue<WifiInfo> strongestWifiInfos = new PriorityQueue<>(Comparator.comparing(WifiInfo::getLevel).reversed());
@@ -163,6 +176,9 @@ public class WifiLocationService {
         return distance;
     }
 
+    /**
+     * 计算位置时，只取欧氏距离前k小的
+     */
     private double calculateTopDistance(Position position, List<WifiInfo> inputWiFiInfos, int x) {
         Set<WifiInfo> positionWiFiInfos = position.getWifiInfos();
         PriorityQueue<Double> distances = new PriorityQueue<>();

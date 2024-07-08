@@ -24,4 +24,10 @@ public interface StrangerDetectionEventRequestOrBuilder extends
    * @return The cameraId.
    */
   int getCameraId();
+
+  /**
+   * <code>int32 strangerId = 3;</code>
+   * @return The strangerId.
+   */
+  int getStrangerId();
 }

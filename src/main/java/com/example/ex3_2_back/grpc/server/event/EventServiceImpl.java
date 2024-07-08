@@ -203,6 +203,7 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
                     .eventDesc("检测到陌生人")
                     .eventImgUrl(request.getImageUrl())
                     .camera(Camera.builder().id(request.getCameraId()).build())
+                    .strangerId(request.getStrangerId())
                     .build();
             EventServerResopnse response = EventServerResopnse.newBuilder()
                     .setMessage("Event created successfully")
@@ -220,6 +221,45 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
             responseObserver.onCompleted();
         }
 
+    }
+
+    /**
+     * 火灾检测
+     */
+    @Override
+    public void fireDetectionEvent(com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
+                                   io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+        try{
+            log.info("fallDetectionEvent: " + request);
+            EventInfo eventInfo = EventInfo.builder()
+                    .eventType(5)
+                    .eventDesc("检测到火灾事件")
+                    .eventImgUrl(request.getImageUrl())
+                    .camera(Camera.builder().id(request.getCameraId()).build())
+                    .build();
+
+
+            eventInfo = eventInfoRepository.save(eventInfo);
+
+            // 通知管理员
+            webSocket.sendMessage("有火灾出现，详情见事件"+eventInfo.getId()+"点击确认跳转至事件列表");
+
+
+            EventServerResopnse response = EventServerResopnse.newBuilder()
+                    .setMessage("Event created successfully")
+                    .setCode(200)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+
+        }catch(Exception e){
+            EventServerResopnse response = EventServerResopnse.newBuilder()
+                    .setMessage("Error occurred: " + e.getMessage())
+                    .setCode(500)
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
     }
 
     /**

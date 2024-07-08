@@ -4,6 +4,7 @@ package com.example.ex3_2_back.controller;
 import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.count.EmotionCount;
 import com.example.ex3_2_back.domain.count.EventCountDTO;
+import com.example.ex3_2_back.domain.count.EventSearchDomain;
 import com.example.ex3_2_back.domain.count.Interaction;
 import com.example.ex3_2_back.entity.EventInfo;
 import com.example.ex3_2_back.log.AutoTakeCount;
@@ -14,10 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -53,4 +51,15 @@ public class EventInfoController {
     public TResult<List<Interaction>> getTopInteractionCounts() {
         return TResult.success(eventInfoService.getTopVolunteersByEventType(1,5));
     }
+
+    @PostMapping("/search")
+    @Operation(summary = "搜索事件", description = "搜索事件")
+    public TResult<Page<EventInfo>> searchEvent(@RequestBody EventSearchDomain eventSearchDomain,
+                                                @PathVariable int page,
+                                                @PathVariable int pageSize) {
+
+        return TResult.success(eventInfoService.searchEvent(eventSearchDomain, PageRequest.of(page,pageSize)));
+    }
+
+
 }

@@ -64,6 +64,14 @@ public  abstract class EventService
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
 
     /**
+     * <code>rpc FireDetectionEvent(.event.FireDetectionEventRequest) returns (.event.EventServerResopnse);</code>
+     */
+    public abstract void fireDetectionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
+        com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
+
+    /**
      * <code>rpc UpdateImageUrl(.event.UpdateImageUrlRequest) returns (.event.EventServerResopnse);</code>
      */
     public abstract void updateImageUrl(
@@ -125,6 +133,14 @@ public  abstract class EventService
       }
 
       @java.lang.Override
+      public  void fireDetectionEvent(
+          com.google.protobuf.RpcController controller,
+          com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
+          com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
+        impl.fireDetectionEvent(controller, request, done);
+      }
+
+      @java.lang.Override
       public  void updateImageUrl(
           com.google.protobuf.RpcController controller,
           com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
@@ -167,6 +183,8 @@ public  abstract class EventService
           case 5:
             return impl.forbiddenAreaInvasionDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest)request);
           case 6:
+            return impl.fireDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest)request);
+          case 7:
             return impl.updateImageUrl(controller, (com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest)request);
           default:
             throw new java.lang.AssertionError("Can't get here.");
@@ -195,6 +213,8 @@ public  abstract class EventService
           case 5:
             return com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest.getDefaultInstance();
           case 6:
+            return com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest.getDefaultInstance();
+          case 7:
             return com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest.getDefaultInstance();
           default:
             throw new java.lang.AssertionError("Can't get here.");
@@ -223,6 +243,8 @@ public  abstract class EventService
           case 5:
             return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
           case 6:
+            return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
+          case 7:
             return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
           default:
             throw new java.lang.AssertionError("Can't get here.");
@@ -282,6 +304,14 @@ public  abstract class EventService
   public abstract void forbiddenAreaInvasionDetectionEvent(
       com.google.protobuf.RpcController controller,
       com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request,
+      com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
+
+  /**
+   * <code>rpc FireDetectionEvent(.event.FireDetectionEventRequest) returns (.event.EventServerResopnse);</code>
+   */
+  public abstract void fireDetectionEvent(
+      com.google.protobuf.RpcController controller,
+      com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
       com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done);
 
   /**
@@ -345,6 +375,11 @@ public  abstract class EventService
             done));
         return;
       case 6:
+        this.fireDetectionEvent(controller, (com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest)request,
+          com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
+            done));
+        return;
+      case 7:
         this.updateImageUrl(controller, (com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest)request,
           com.google.protobuf.RpcUtil.<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>specializeCallback(
             done));
@@ -376,6 +411,8 @@ public  abstract class EventService
       case 5:
         return com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest.getDefaultInstance();
       case 6:
+        return com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest.getDefaultInstance();
+      case 7:
         return com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest.getDefaultInstance();
       default:
         throw new java.lang.AssertionError("Can't get here.");
@@ -404,6 +441,8 @@ public  abstract class EventService
       case 5:
         return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
       case 6:
+        return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
+      case 7:
         return com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance();
       default:
         throw new java.lang.AssertionError("Can't get here.");
@@ -516,12 +555,27 @@ public  abstract class EventService
           com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()));
     }
 
+    public  void fireDetectionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
+        com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
+      channel.callMethod(
+        getDescriptor().getMethods().get(6),
+        controller,
+        request,
+        com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
+        com.google.protobuf.RpcUtil.generalizeCallback(
+          done,
+          com.example.ex3_2_back.grpc.server.event.EventServerResopnse.class,
+          com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()));
+    }
+
     public  void updateImageUrl(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
         com.google.protobuf.RpcCallback<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> done) {
       channel.callMethod(
-        getDescriptor().getMethods().get(6),
+        getDescriptor().getMethods().get(7),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance(),
@@ -566,6 +620,11 @@ public  abstract class EventService
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse forbiddenAreaInvasionDetectionEvent(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request)
+        throws com.google.protobuf.ServiceException;
+
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse fireDetectionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request)
         throws com.google.protobuf.ServiceException;
 
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse updateImageUrl(
@@ -653,12 +712,24 @@ public  abstract class EventService
     }
 
 
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse fireDetectionEvent(
+        com.google.protobuf.RpcController controller,
+        com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request)
+        throws com.google.protobuf.ServiceException {
+      return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
+        getDescriptor().getMethods().get(6),
+        controller,
+        request,
+        com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());
+    }
+
+
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse updateImageUrl(
         com.google.protobuf.RpcController controller,
         com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request)
         throws com.google.protobuf.ServiceException {
       return (com.example.ex3_2_back.grpc.server.event.EventServerResopnse) channel.callBlockingMethod(
-        getDescriptor().getMethods().get(6),
+        getDescriptor().getMethods().get(7),
         controller,
         request,
         com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance());

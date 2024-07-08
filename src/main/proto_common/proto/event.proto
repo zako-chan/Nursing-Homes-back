@@ -40,6 +40,7 @@ message VolunteerInteractionEventRequest{
 message StrangerDetectionEventRequest{
     string imageUrl = 1;
     int32 cameraId = 2;
+    int32 strangerId = 3;
 }
 
 message FallDetectionEventRequest{
@@ -49,6 +50,11 @@ message FallDetectionEventRequest{
 }
 
 message ForbiddenAreaInvasionDetectionEventRequest{
+    string imageUrl = 1;
+    int32 cameraId = 2;
+}
+
+message FireDetectionEventRequest{
     string imageUrl = 1;
     int32 cameraId = 2;
 }
@@ -68,6 +74,7 @@ service EventService {
     rpc StrangerDetectionEvent(StrangerDetectionEventRequest) returns (EventServerResopnse);
     rpc FallDetectionEvent(FallDetectionEventRequest) returns (EventServerResopnse);
     rpc ForbiddenAreaInvasionDetectionEvent(ForbiddenAreaInvasionDetectionEventRequest) returns (EventServerResopnse);
+    rpc FireDetectionEvent(FireDetectionEventRequest) returns (EventServerResopnse);
     rpc UpdateImageUrl(UpdateImageUrlRequest) returns (EventServerResopnse);
 }
 

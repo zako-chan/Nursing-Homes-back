@@ -201,6 +201,37 @@ public final class EventServiceGrpc {
     return getForbiddenAreaInvasionDetectionEventMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest,
+      com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getFireDetectionEventMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "FireDetectionEvent",
+      requestType = com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest.class,
+      responseType = com.example.ex3_2_back.grpc.server.event.EventServerResopnse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest,
+      com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getFireDetectionEventMethod() {
+    io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest, com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getFireDetectionEventMethod;
+    if ((getFireDetectionEventMethod = EventServiceGrpc.getFireDetectionEventMethod) == null) {
+      synchronized (EventServiceGrpc.class) {
+        if ((getFireDetectionEventMethod = EventServiceGrpc.getFireDetectionEventMethod) == null) {
+          EventServiceGrpc.getFireDetectionEventMethod = getFireDetectionEventMethod =
+              io.grpc.MethodDescriptor.<com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest, com.example.ex3_2_back.grpc.server.event.EventServerResopnse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "FireDetectionEvent"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.example.ex3_2_back.grpc.server.event.EventServerResopnse.getDefaultInstance()))
+              .setSchemaDescriptor(new EventServiceMethodDescriptorSupplier("FireDetectionEvent"))
+              .build();
+        }
+      }
+    }
+    return getFireDetectionEventMethod;
+  }
+
   private static volatile io.grpc.MethodDescriptor<com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest,
       com.example.ex3_2_back.grpc.server.event.EventServerResopnse> getUpdateImageUrlMethod;
 
@@ -327,6 +358,13 @@ public final class EventServiceGrpc {
 
     /**
      */
+    default void fireDetectionEvent(com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
+        io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getFireDetectionEventMethod(), responseObserver);
+    }
+
+    /**
+     */
     default void updateImageUrl(com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
         io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getUpdateImageUrlMethod(), responseObserver);
@@ -413,6 +451,14 @@ public final class EventServiceGrpc {
 
     /**
      */
+    public void fireDetectionEvent(com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request,
+        io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getFireDetectionEventMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void updateImageUrl(com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request,
         io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
@@ -479,6 +525,13 @@ public final class EventServiceGrpc {
     public com.example.ex3_2_back.grpc.server.event.EventServerResopnse forbiddenAreaInvasionDetectionEvent(com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getForbiddenAreaInvasionDetectionEventMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.example.ex3_2_back.grpc.server.event.EventServerResopnse fireDetectionEvent(com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getFireDetectionEventMethod(), getCallOptions(), request);
     }
 
     /**
@@ -558,6 +611,14 @@ public final class EventServiceGrpc {
 
     /**
      */
+    public com.google.common.util.concurrent.ListenableFuture<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> fireDetectionEvent(
+        com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getFireDetectionEventMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
     public com.google.common.util.concurrent.ListenableFuture<com.example.ex3_2_back.grpc.server.event.EventServerResopnse> updateImageUrl(
         com.example.ex3_2_back.grpc.server.event.UpdateImageUrlRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
@@ -571,7 +632,8 @@ public final class EventServiceGrpc {
   private static final int METHODID_STRANGER_DETECTION_EVENT = 3;
   private static final int METHODID_FALL_DETECTION_EVENT = 4;
   private static final int METHODID_FORBIDDEN_AREA_INVASION_DETECTION_EVENT = 5;
-  private static final int METHODID_UPDATE_IMAGE_URL = 6;
+  private static final int METHODID_FIRE_DETECTION_EVENT = 6;
+  private static final int METHODID_UPDATE_IMAGE_URL = 7;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -612,6 +674,10 @@ public final class EventServiceGrpc {
           break;
         case METHODID_FORBIDDEN_AREA_INVASION_DETECTION_EVENT:
           serviceImpl.forbiddenAreaInvasionDetectionEvent((com.example.ex3_2_back.grpc.server.event.ForbiddenAreaInvasionDetectionEventRequest) request,
+              (io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>) responseObserver);
+          break;
+        case METHODID_FIRE_DETECTION_EVENT:
+          serviceImpl.fireDetectionEvent((com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest) request,
               (io.grpc.stub.StreamObserver<com.example.ex3_2_back.grpc.server.event.EventServerResopnse>) responseObserver);
           break;
         case METHODID_UPDATE_IMAGE_URL:
@@ -679,6 +745,13 @@ public final class EventServiceGrpc {
               com.example.ex3_2_back.grpc.server.event.EventServerResopnse>(
                 service, METHODID_FORBIDDEN_AREA_INVASION_DETECTION_EVENT)))
         .addMethod(
+          getFireDetectionEventMethod(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.example.ex3_2_back.grpc.server.event.FireDetectionEventRequest,
+              com.example.ex3_2_back.grpc.server.event.EventServerResopnse>(
+                service, METHODID_FIRE_DETECTION_EVENT)))
+        .addMethod(
           getUpdateImageUrlMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
@@ -739,6 +812,7 @@ public final class EventServiceGrpc {
               .addMethod(getStrangerDetectionEventMethod())
               .addMethod(getFallDetectionEventMethod())
               .addMethod(getForbiddenAreaInvasionDetectionEventMethod())
+              .addMethod(getFireDetectionEventMethod())
               .addMethod(getUpdateImageUrlMethod())
               .build();
         }

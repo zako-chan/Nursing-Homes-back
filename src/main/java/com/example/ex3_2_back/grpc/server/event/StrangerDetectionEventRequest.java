@@ -89,6 +89,17 @@ private static final long serialVersionUID = 0L;
     return cameraId_;
   }
 
+  public static final int STRANGERID_FIELD_NUMBER = 3;
+  private int strangerId_ = 0;
+  /**
+   * <code>int32 strangerId = 3;</code>
+   * @return The strangerId.
+   */
+  @java.lang.Override
+  public int getStrangerId() {
+    return strangerId_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -109,6 +120,9 @@ private static final long serialVersionUID = 0L;
     if (cameraId_ != 0) {
       output.writeInt32(2, cameraId_);
     }
+    if (strangerId_ != 0) {
+      output.writeInt32(3, strangerId_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -124,6 +138,10 @@ private static final long serialVersionUID = 0L;
     if (cameraId_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, cameraId_);
+    }
+    if (strangerId_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, strangerId_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -144,6 +162,8 @@ private static final long serialVersionUID = 0L;
         .equals(other.getImageUrl())) return false;
     if (getCameraId()
         != other.getCameraId()) return false;
+    if (getStrangerId()
+        != other.getStrangerId()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -159,6 +179,8 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getImageUrl().hashCode();
     hash = (37 * hash) + CAMERAID_FIELD_NUMBER;
     hash = (53 * hash) + getCameraId();
+    hash = (37 * hash) + STRANGERID_FIELD_NUMBER;
+    hash = (53 * hash) + getStrangerId();
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -292,6 +314,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       imageUrl_ = "";
       cameraId_ = 0;
+      strangerId_ = 0;
       return this;
     }
 
@@ -330,6 +353,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.cameraId_ = cameraId_;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.strangerId_ = strangerId_;
       }
     }
 
@@ -385,6 +411,9 @@ private static final long serialVersionUID = 0L;
       if (other.getCameraId() != 0) {
         setCameraId(other.getCameraId());
       }
+      if (other.getStrangerId() != 0) {
+        setStrangerId(other.getStrangerId());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -421,6 +450,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 16
+            case 24: {
+              strangerId_ = input.readInt32();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 24
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -538,6 +572,38 @@ private static final long serialVersionUID = 0L;
     public Builder clearCameraId() {
       bitField0_ = (bitField0_ & ~0x00000002);
       cameraId_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int strangerId_ ;
+    /**
+     * <code>int32 strangerId = 3;</code>
+     * @return The strangerId.
+     */
+    @java.lang.Override
+    public int getStrangerId() {
+      return strangerId_;
+    }
+    /**
+     * <code>int32 strangerId = 3;</code>
+     * @param value The strangerId to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStrangerId(int value) {
+
+      strangerId_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 strangerId = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStrangerId() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      strangerId_ = 0;
       onChanged();
       return this;
     }

@@ -40,6 +40,6 @@ public class Position {
     }
 
     public String toString(){
-        return "x:"+x+" y:"+y+" z:"+z;
+        return "id:"+id+" x:"+x+" y:"+y+" z:"+z;
     }
 }
