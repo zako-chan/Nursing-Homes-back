@@ -55,11 +55,10 @@ public class EventInfoController {
     @PostMapping("/search")
     @Operation(summary = "搜索事件", description = "搜索事件")
     public TResult<Page<EventInfo>> searchEvent(@RequestBody EventSearchDomain eventSearchDomain,
-                                                @PathVariable int page,
-                                                @PathVariable int pageSize) {
+                                                @RequestParam int page,
+                                                @RequestParam int pageSize) {
 
         return TResult.success(eventInfoService.searchEvent(eventSearchDomain, PageRequest.of(page,pageSize)));
     }
-
 
 }
