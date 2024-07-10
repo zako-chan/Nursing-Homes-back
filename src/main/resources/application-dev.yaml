@@ -1,6 +1,6 @@
 #需要修改配置
 server:
-  port: 8080
+  port: 8081
 
 grpc:
   server:
@@ -15,7 +15,7 @@ client:
     address: 172.20.10.6:8503
     negotiationType: plaintext
   vision-service:
-    address: 172.20.10.6:8503
+    address: 192.168.43.193:8503
     negotiationType: plaintext
 
 spring:
@@ -41,8 +41,10 @@ spring:
     type: simple
 
 camera:
-  base-push-url: "rtmp://8.130.148.5"
-  base-pull-url: "http://8.130.148.5:8080"
+#  base-push-url: "rtmp://8.130.148.5"
+#  base-pull-url: "http://8.130.148.5:8080"
+  base-push-url: "rtmp://192.168.43.52"
+  base-pull-url: "http://192.168.43.52:8080"
   stream-url: "http://8.130.148.5:1985/api/v1/streams/"
 
 oss:

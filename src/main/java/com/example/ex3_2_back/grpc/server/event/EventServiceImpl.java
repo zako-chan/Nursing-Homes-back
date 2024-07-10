@@ -141,7 +141,7 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
         try{
             log.info("faceRecognitionEvent: " + request);
             EventInfo eventInfo = EventInfo.builder()
-                    .eventType(5)
+                    .eventType(6)
                     .eventImgUrl(request.getImageUrl())
                     .camera(Camera.builder().id(request.getCameraId()).build())
                     .build();
@@ -280,7 +280,8 @@ public class EventServiceImpl extends EventServiceGrpc.EventServiceImplBase{
 
 
             eventInfo = eventInfoRepository.save(eventInfo);
-
+            log.info(eventInfo.toString());
+            log.info(webSocket.toString());
             // 通知管理员
             webSocket.sendMessage("有老人摔倒，请及时处理，详情见事件"+eventInfo.getId()+"点击确认跳转至事件列表");
 

@@ -42,7 +42,7 @@ public class EventInfo {
      * 5火灾
      */
     @Column
-    private int eventType;
+    private Integer eventType;
 
     /**
      * 事件发生的时间

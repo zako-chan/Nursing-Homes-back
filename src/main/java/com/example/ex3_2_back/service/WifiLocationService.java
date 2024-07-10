@@ -71,7 +71,7 @@ public class WifiLocationService {
         Map<Position,Double> distanceMap = new HashMap<>();
         for(Position position:positions){
 
-            double distance = calculateStandardDistance(position,wifiInfoList);
+            double distance = calculateDistance(position,wifiInfoList);
             distanceMap.put(position,distance);
             if(position.getX()== 1 && position.getY()==2 && position.getZ()==1){
                 log.info("position: {}", position);

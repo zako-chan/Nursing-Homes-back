@@ -80,6 +80,7 @@ public class CameraService {
             }
         }
         return false;
+//        return true;
     }
 
     public Optional<Camera> getCameraById(Integer id){

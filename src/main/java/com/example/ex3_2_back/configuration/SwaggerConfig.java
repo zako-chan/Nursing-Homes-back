@@ -45,10 +45,10 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("SpringCloud微服务系统API")
+                        .title("20+智慧养老院")
                         .version("1.0")
                         .contact(new Contact().name("hyx").url("www.baidu.com").email("XXXXX@163.com"))
-                        .description( "SpringCloud微服务系统API")
+                        .description( "20+智慧养老院")
                         .termsOfService("www.baidu.com")
                         .license(new License().name("Apache 2.0")
                                 .url("www.baidu.com")));

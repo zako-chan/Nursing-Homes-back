@@ -64,6 +64,7 @@ public class WebSocket {
     }
 
     public static void sendMessage(String message) {
+        log.info("发送消息:"+message);
         clients.forEach((key, value) -> value.session.getAsyncRemote().sendText(message));
     }
 }

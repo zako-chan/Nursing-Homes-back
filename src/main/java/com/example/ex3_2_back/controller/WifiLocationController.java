@@ -1,6 +1,7 @@
 package com.example.ex3_2_back.controller;
 
 
+import com.example.ex3_2_back.domain.TResult;
 import com.example.ex3_2_back.domain.wifiLocation.ElderlyPosition;
 import com.example.ex3_2_back.domain.wifiLocation.LocationData;
 import com.example.ex3_2_back.entity.Position;
@@ -36,6 +37,7 @@ public class WifiLocationController {
     @Operation(summary = "上传训练数据", description = "上传训练数据")
     public String uploadTrainData(@RequestBody Position position) {
         wifiLocationService.savePosition(position);
+//        wifiLocationService.savePrePosition(2,position);
         return "success";
     }
 
@@ -49,7 +51,7 @@ public class WifiLocationController {
 
     @GetMapping("/positions")
     @Operation(summary = "获取所有位置", description = "获取所有位置")
-    public List<ElderlyPosition> getAllPositions() {
-        return wifiLocationService.getAllElderlyPositions();
+    public TResult<List<ElderlyPosition>> getAllPositions() {
+        return TResult.success(wifiLocationService.getAllElderlyPositions());
     }
 }

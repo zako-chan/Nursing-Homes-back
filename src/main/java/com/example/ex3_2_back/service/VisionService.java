@@ -29,7 +29,7 @@ public class VisionService {
      * 人脸库中添加人脸
      */
     public void faceCollection(Integer userId,String identity,String username){
-        String pullUrl = basePullUrl + "/face/" + identity + userId;
+        String pullUrl = basePullUrl + "/face/" + identity + userId + ".flv";
         String pushUrl = basePushUrl + "/faceprocess/" + identity + userId;
         FaceCollectionRequest request = FaceCollectionRequest.newBuilder()
                 .setUserId(userId)
